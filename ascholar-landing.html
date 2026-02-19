@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AScholar — Accessing Global Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── Brand Tokens ─────────────────────────────────────────── */
+:root {
+  --blue-deep:    #0D3D5C;
+  --blue-mid:     #145078;
+  --blue-main:    #0064A0;
+  --blue-bright:  #2878A0;
+  --blue-light:   #78A0C8;
+  --blue-pale:    #D6E8F4;
+  --yellow:       #F0F000;
+  --yellow-warm:  #E8DC00;
+  --teal:         #00648C;
+  --white:        #FFFFFF;
+  --off-white:    #F4F8FC;
+  --slate:        #1A3346;
+  --muted:        #5A7A90;
+  --border:       #C8DDE8;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--slate);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; }
+
+/* ── Nav ─────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,100,160,0.12);
+  transition: box-shadow 0.3s;
+}
+
+nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-mark {
+  width: 34px; height: 34px;
+  background: var(--yellow);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900; font-size: 20px;
+  color: var(--blue-mid);
+  flex-shrink: 0;
+}
+
+.nav-logo-img{
+    width: 164px; 
+    height: 40px;
+}
+
+.nav-links {
+  display: flex; gap: 64px; flex-wrap: wrap;
+}
+
+.nav-links a {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 1.2rem; 
+  color: var(--blue-mid); 
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue-mid); }
+
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 1.25rem;
+  color: var(--blue-mid);
+  letter-spacing: -0.01em;
+}
+
+.nav-tagline {
+  font-size: 0.7rem; color: var(--muted);
+  font-style: italic; letter-spacing: 0.02em;
+  display: block; margin-top: -3px;
+}
+
+.nav-cta {
+  background: var(--blue-main);
+  color: var(--white);
+  padding: 8px 20px; border-radius: 6px;
+  font-size: 0.85rem; font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
+
+/* ── Hero ────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 5vw 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--blue-deep);
+}
+
+/* Geometric background pattern */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(0,100,160,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0,100,140,0.3) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Diamond grid pattern */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(240,240,0,0.15);
+  border: 1px solid rgba(240,240,0,0.35);
+  color: var(--yellow);
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 24px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--yellow);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  color: var(--white);
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s 0.1s ease both;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 em {
+  font-style: italic; color: var(--yellow);
+}
+
+.hero-sub {
+  font-size: 1.05rem; color: rgba(255,255,255,0.72);
+  max-width: 460px; line-height: 1.7;
+  margin-bottom: 40px;
+  font-weight: 300;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  background: var(--yellow);
+  color: var(--blue-deep);
+  padding: 13px 28px; border-radius: 8px;
+  font-weight: 700; font-size: 0.95rem;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,240,0,0.3); }
+
+.btn-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  padding: 13px 28px; border-radius: 8px;
+  font-weight: 500; font-size: 0.95rem;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.25);
+  transition: border-color 0.2s, background 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
+
+/* Hero right — stat cards */
+.hero-right {
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.stat-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 20px;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s, transform 0.2s;
+}
+.stat-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-3px); }
+
+.stat-card.accent {
+  background: rgba(240,240,0,0.1);
+  border-color: rgba(240,240,0,0.25);
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 900;
+  color: var(--white); line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-card.accent .stat-num { color: var(--yellow); }
+
+.stat-label {
+  font-size: 0.78rem; color: rgba(255,255,255,0.55);
+  font-weight: 400; line-height: 1.4;
+}
+
+.stat-card.wide {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 16px;
+}
+
+.stat-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: rgba(0,100,160,0.4);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── How It Works ────────────────────────────────────────── */
+.section {
+  padding: 96px 5vw;
+}
+
+.section-inner {
+  max-width: 1100px; margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue-main); margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  color: var(--blue-deep);
+  margin-bottom: 16px; letter-spacing: -0.02em;
+}
+
+.section-sub {
+  font-size: 1rem; color: var(--muted);
+  max-width: 540px; line-height: 1.7; font-weight: 300;
+  margin-bottom: 56px;
+}
+
+/* Rounds timeline */
+.rounds {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  position: relative;
+}
+
+.rounds::before {
+  content: '';
+  position: absolute; top: 28px; left: 10%; right: 10%; height: 2px;
+  background: linear-gradient(90deg, var(--blue-pale), var(--blue-light), var(--blue-pale));
+  z-index: 0;
+}
+
+.round-item {
+  text-align: center; padding: 0 16px;
+  position: relative; z-index: 1;
+}
+
+.round-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--blue-main);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 900; font-size: 1.25rem;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 3px var(--blue-main);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.round-item:hover .round-num {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 3px var(--blue-main), 0 6px 20px rgba(0,100,160,0.35);
+}
+
+.round-item:nth-child(4) .round-num { background: var(--blue-deep); box-shadow: 0 0 0 3px var(--blue-deep); }
+
+.round-title {
+  font-weight: 600; font-size: 0.9rem; color: var(--blue-deep);
+  margin-bottom: 6px;
+}
+
+.round-desc {
+  font-size: 0.8rem; color: var(--muted); line-height: 1.5;
+}
+
+.round-time {
+  display: inline-block; margin-top: 8px;
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--blue-main);
+  background: var(--blue-pale);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* ── For Whom ─────────────────────────────────────────────── */
+.audience-section {
+  background: var(--off-white);
+  padding: 96px 5vw;
+}
+
+.audience-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  margin-top: 0;
+}
+
+.audience-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative; overflow: hidden;
+}
+
+.audience-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--blue-main);
+}
+
+.audience-card:nth-child(2)::before { background: var(--teal); }
+.audience-card:nth-child(3)::before { background: var(--yellow-warm); }
+.audience-card:nth-child(4)::before { background: #10B981; }
+
+
+.audience-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(13,61,92,0.1);
+  border-color: var(--blue-light);
+}
+
+.aud-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--blue-pale);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 18px;
+}
+
+.audience-card:nth-child(2) .aud-icon { background: rgba(0,100,140,0.1); }
+.audience-card:nth-child(3) .aud-icon { background: rgba(240,240,0,0.15); }
+.audience-card:nth-child(4) .aud-icon { background: rgba(16,185,129,0.1); }
+
+
+.aud-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--blue-deep); margin-bottom: 10px;
+}
+
+.aud-desc {
+  font-size: 0.88rem; color: var(--muted); line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.aud-list { list-style: none; }
+.aud-list li {
+  font-size: 0.83rem; color: var(--slate);
+  padding: 5px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.aud-list li:last-child { border-bottom: none; }
+.aud-list li::before {
+  content: '→';
+  color: var(--blue-main); font-size: 0.75rem; flex-shrink: 0;
+}
+
+/* ── Progression Table Preview ───────────────────────────── */
+.table-section {
+  padding: 96px 5vw;
+  background: var(--blue-deep);
+  position: relative; overflow: hidden;
+}
+
+.table-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: linear-gradient(45deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+                    linear-gradient(-45deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.table-section .section-label { color: var(--yellow); }
+.table-section .section-title { color: var(--white); }
+.table-section .section-sub { color: rgba(255,255,255,0.6); }
+
+.pt-wrapper {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.pt-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.pt-title {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+.pt-filters {
+  display: flex; gap: 8px;
+}
+
+.pt-filter-tag {
+  background: rgba(0,100,160,0.3);
+  border: 1px solid rgba(0,100,160,0.5);
+  color: var(--blue-light); font-size: 0.68rem;
+  padding: 3px 10px; border-radius: 12px; font-weight: 500;
+}
+
+table.progression {
+  width: 100%; border-collapse: collapse;
+}
+
+.progression th {
+  padding: 12px 16px; text-align: left;
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: rgba(255,255,255,0.4); letter-spacing: 0.06em;
+  text-transform: uppercase; font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.progression td {
+  padding: 14px 16px; font-size: 0.85rem;
+  color: rgba(255,255,255,0.82);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.progression tr:hover td { background: rgba(255,255,255,0.04); }
+
+.score-pill {
+  display: inline-block;
+  padding: 2px 10px; border-radius: 10px;
+  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500;
+}
+
+.score-high { background: rgba(16,185,129,0.15); color: #34D399; }
+.score-mid  { background: rgba(0,100,160,0.25); color: var(--blue-light); }
+.score-pend { background: rgba(240,240,0,0.1); color: var(--yellow); }
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600;
+}
+.status-q  { background: rgba(16,185,129,0.15); color: #34D399; }
+.status-p  { background: rgba(240,240,0,0.12); color: var(--yellow); }
+.status-e  { background: rgba(239,68,68,0.15); color: #FCA5A5; }
+
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+.anon-row td { color: rgba(255,255,255,0.25); font-style: italic; }
+.anon-row td:first-child { letter-spacing: 0.1em; }
+
+.pt-note {
+  padding: 12px 24px;
+  background: rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.75rem; color: rgba(255,255,255,0.35);
+  font-style: italic;
+}
+
+/* ── Register Interest Form ───────────────────────────────── */
+.register-section {
+  padding: 96px 5vw;
+  background: var(--white);
+}
+
+.register-inner {
+  max-width: 680px; margin: 0 auto; text-align: center;
+}
+
+.register-inner .section-title { margin-bottom: 12px; }
+.register-inner .section-sub { margin: 0 auto 48px; }
+
+.form-card {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 40px;
+  text-align: left;
+}
+
+.form-tabs {
+  display: flex; gap: 0; margin-bottom: 32px;
+  background: var(--border); border-radius: 8px; padding: 3px;
+}
+
+.form-tab {
+  flex: 1; padding: 8px 16px; border-radius: 6px;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  text-align: center; transition: all 0.2s;
+  border: none; background: transparent; color: var(--muted);
+}
+
+.form-tab.active {
+  background: var(--white); color: var(--blue-deep);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.form-panel { display: none; }
+.form-panel.active { display: block; }
+
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-row.full { grid-template-columns: 1fr; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+label {
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--blue-deep); letter-spacing: 0.02em;
+}
+
+input, select, textarea {
+  padding: 10px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--white); color: var(--slate);
+  font-family: var(--font-body); font-size: 0.88rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--blue-main);
+  box-shadow: 0 0 0 3px rgba(0,100,160,0.1);
+}
+
+textarea { resize: vertical; min-height: 90px; }
+
+select { appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7A90' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.submit-btn {
+  width: 100%; padding: 14px;
+  background: var(--blue-main); color: var(--white);
+  border: none; border-radius: 8px; cursor: pointer;
+  font-family: var(--font-body); font-size: 0.95rem; font-weight: 700;
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+
+.submit-btn:hover {
+  background: var(--blue-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,100,160,0.3);
+}
+
+.form-note {
+  font-size: 0.75rem; color: var(--muted); text-align: center;
+  margin-top: 14px; line-height: 1.5;
+}
+
+/* Success state */
+.form-success {
+  display: none; text-align: center; padding: 32px 0;
+}
+
+.success-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(16,185,129,0.1); border: 2px solid #10B981;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto 20px;
+}
+
+.success-title {
+  font-family: var(--font-display); font-size: 1.5rem;
+  color: var(--blue-deep); margin-bottom: 8px;
+}
+
+.success-sub { font-size: 0.9rem; color: var(--muted); }
+
+/* ── Partners / Trust strip ──────────────────────────────── */
+.trust-section {
+  padding: 56px 5vw;
+  background: var(--off-white);
+  border-top: 1px solid var(--border);
+}
+
+.trust-inner {
+  max-width: 1100px; margin: 0 auto; text-align: center;
+}
+
+.trust-label {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.trust-items {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+}
+
+.trust-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 20px;
+  font-size: 0.82rem; font-weight: 600; color: var(--muted);
+  display: flex; align-items: center; gap: 8px;
+}
+
+.trust-item-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-main); }
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+  background: var(--slate);
+  padding: 40px 5vw;
+  border-top: 3px solid var(--yellow-warm);
+}
+
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 20px;
+}
+
+.footer-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.footer-logo-mark {
+  width: 30px; height: 30px; background: var(--yellow);
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 900; font-size: 17px;
+  color: var(--blue-deep);
+}
+
+.footer-logo-text {
+  font-family: var(--font-display); font-weight: 700;
+  color: var(--white); font-size: 1.1rem;
+}
+
+.footer-logo-tagline{
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo-img{
+    width: 164px; 
+    height: 40px;
+}
+
+.footer-tagline {
+  font-size: 0.75rem; 
+  color: rgba(255, 255, 255, 0.62);
+  font-style: italic;
+  margin-top: 23px;
+}
+
+.footer-links {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.footer-links a {
+  font-size: 0.8rem;   color: rgba(255, 255, 255, 0.62);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+
+.footer-copy {
+  font-size: 0.75rem; color: rgba(255, 255, 255, 0.62);
+  width: 100%; text-align: center; margin-top: 20px;
+  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-right { display: none; }
+  .rounds { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .rounds::before { display: none; }
+  .audience-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+  .rounds { grid-template-columns: 1fr; }
+  .nav-cta { display: none; }
+}
+
+/* ── Scroll animations ───────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ── Nav ─────────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div>
+      <img src="assets/AScholar-logo.png" class="nav-logo-img"/>
+    </div>
+  </a>
+ 
+  <a href="#register" class="nav-cta">Register Interest</a>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Now Accepting Founding Partners
+      </div>
+      <h1>Where <em>Academic Merit</em> Meets Global Opportunity</h1>
+      <p class="hero-sub">
+        AScholar connects high-potential students from emerging markets with international universities and scholarship organisations — through a rigorous, standardised, multi-round assessment that anyone can trust.
+      </p>
+      <div class="hero-actions">
+        <a href="#register" class="btn-primary">
+          Register Your Interest
+          <span>→</span>
+        </a>
+        <a href="#how" class="btn-ghost">
+          How It Works
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="stat-grid">
+        <div class="stat-card accent">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Progressive assessment rounds</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">200+</div>
+          <div class="stat-label">Target students for founding cohort</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2×</div>
+          <div class="stat-label">Cohort cycles per year</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Cost to founding partner institutions</div>
+        </div>
+        <div class="stat-card wide">
+          <div class="stat-icon">🎓</div>
+          <div>
+            <div class="stat-num" style="font-size:1.1rem">Progression Table</div>
+            <div class="stat-label">Ranked, verified candidate profiles — accessible to verified universities and sponsors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ─────────────────────────────────────── -->
+<section class="section" id="how">
+  <div class="section-inner">
+    <p class="section-label reveal">The Assessment</p>
+    <h2 class="section-title reveal">Four rounds. One trusted result.</h2>
+    <p class="section-sub reveal">
+      Each cohort runs through up to four progressive rounds. Students are ranked on a Progression Table that universities and sponsors can access directly — no cold applications, no guesswork.
+    </p>
+
+    <div class="rounds reveal">
+      <div class="round-item">
+        <div class="round-num">1</div>
+        <div class="round-title">Eligibility & Readiness</div>
+        <div class="round-desc">English comprehension, logical reasoning, quantitative literacy</div>
+        <span class="round-time">45 – 60 min</span>
+      </div>
+      <div class="round-item">
+        <div class="round-num">2</div>
+        <div class="round-title">Scholarship Readiness</div>
+        <div class="round-desc">Critical reasoning, data interpretation, writing fundamentals</div>
+        <span class="round-time">60 – 90 min</span>
+      </div>
+      <div class="round-item">
+        <div class="round-num">3</div>
+        <div class="round-title">Subject Track</div>
+        <div class="round-desc">STEM, Business, or Humanities — expert-designed questions</div>
+        <span class="round-time">Track-based</span>
+      </div>
+      <div class="round-item">
+        <div class="round-num">4</div>
+        <div class="round-title">Essay & Interview</div>
+        <div class="round-desc">Structured written response, expert-reviewed with rubric</div>
+        <span class="round-time">Manual review</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── For Whom ──────────────────────────────────────────── -->
+<section class="audience-section" id="who">
+  <div class="section-inner">
+    <p class="section-label reveal">Who It's For</p>
+    <h2 class="section-title reveal">Built for every side of the equation.</h2>
+    <p class="section-sub reveal">
+      AScholar serves four groups — each with a distinct role in turning academic potential into real opportunity.
+    </p>
+    <div class="audience-grid">
+
+      <div class="audience-card reveal">
+        <div class="aud-icon">🎓</div>
+        <div class="aud-title">Students</div>
+        <p class="aud-desc">High-potential students seeking international scholarships and university places — regardless of access to expensive preparation or guidance.</p>
+        <ul class="aud-list">
+          <li>Sit free, standardised assessments</li>
+          <li>Build a verified academic profile</li>
+          <li>Receive direct offers and invitations</li>
+          <li>Access learning content and exam prep</li>
+        </ul>
+      </div>
+
+      <div class="audience-card reveal">
+        <div class="aud-icon">🏛️</div>
+        <div class="aud-title">Universities & Admission Officers</div>
+        <p class="aud-desc">Institutions looking to discover academically ready international candidates — without the noise of unverified cold applications.</p>
+        <ul class="aud-list">
+          <li>Access the ranked Progression Table</li>
+          <li>Filter by country, subject, score range</li>
+          <li>Send invitations or admission offers</li>
+          <li>Zero cost for founding partners</li>
+        </ul>
+      </div>
+
+      <div class="audience-card reveal">
+        <div class="aud-icon">💰</div>
+        <div class="aud-title">Scholarship Sponsors</div>
+        <p class="aud-desc">Organisations and philanthropists who want to fund the right students — with verified merit data, not just compelling essays.</p>
+        <ul class="aud-list">
+          <li>Discover candidates by track and score</li>
+          <li>Issue scholarship offers directly</li>
+          <li>Invite applications with confidence</li>
+          <li>Full audit trail on all offers</li>
+        </ul>
+      </div>
+
+      <div class="audience-card reveal">
+        <div class="aud-icon">📚</div>
+        <div class="aud-title">Teachers & Educators</div>
+        <p class="aud-desc">Subject experts who create the content that prepares students for the assessment — and earn revenue as their teaching reaches a global audience.</p>
+        <ul class="aud-list">
+          <li>Publish courses, notes, and videos</li>
+          <li>Run subject-specific class threads</li>
+          <li>Earn from student engagement</li>
+          <li>Shape how students prepare</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Progression Table Preview ────────────────────────── -->
+<section class="table-section">
+  <div class="section-inner" style="position:relative;z-index:2;">
+    <p class="section-label reveal">The Progression Table</p>
+    <h2 class="section-title reveal">The ranking universities actually trust.</h2>
+    <p class="section-sub reveal">
+      Every qualified student appears on a Progression Table visible to verified partner institutions. The data is structured, scored, and independently assessed.
+    </p>
+
+    <div class="pt-wrapper reveal">
+      <div class="pt-header">
+        <span class="pt-title">Cohort 1 — Founding Season · Progression Table</span>
+        <div class="pt-filters">
+          <span class="pt-filter-tag">All Countries</span>
+          <span class="pt-filter-tag">All Tracks</span>
+          <span class="pt-filter-tag">Qualified Only</span>
+        </div>
+      </div>
+      <table class="progression">
+        <thead>
+          <tr>
+            <th>Candidate</th>
+            <th>Country</th>
+            <th>Track</th>
+            <th>R1</th>
+            <th>R2</th>
+            <th>R3</th>
+            <th>Cumulative</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Adaeze O.</strong></td>
+            <td>🇳🇬 Nigeria</td>
+            <td>STEM</td>
+            <td><span class="score-pill score-high">91%</span></td>
+            <td><span class="score-pill score-high">88%</span></td>
+            <td><span class="score-pill score-high">85%</span></td>
+            <td><span class="score-pill score-high">88.1</span></td>
+            <td><span class="status-badge status-q"><span class="status-dot"></span> Qualified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Kwame A.</strong></td>
+            <td>🇬🇭 Ghana</td>
+            <td>Business</td>
+            <td><span class="score-pill score-high">84%</span></td>
+            <td><span class="score-pill score-high">82%</span></td>
+            <td><span class="score-pill score-mid">79%</span></td>
+            <td><span class="score-pill score-high">81.8</span></td>
+            <td><span class="status-badge status-q"><span class="status-dot"></span> Qualified</span></td>
+          </tr>
+          <tr>
+            <td><strong>Fatima M.</strong></td>
+            <td>🇰🇪 Kenya</td>
+            <td>Humanities</td>
+            <td><span class="score-pill score-high">79%</span></td>
+            <td><span class="score-pill score-mid">76%</span></td>
+            <td><span class="score-pill score-pend">—</span></td>
+            <td><span class="score-pill score-mid">77.5</span></td>
+            <td><span class="status-badge status-p"><span class="status-dot"></span> Pending R4</span></td>
+          </tr>
+          <tr class="anon-row">
+            <td>••••• •••</td>
+            <td>🌍</td>
+            <td>STEM</td>
+            <td><span class="score-pill score-mid">74%</span></td>
+            <td><span class="score-pill score-mid">70%</span></td>
+            <td><span class="score-pill score-mid">68%</span></td>
+            <td><span class="score-pill score-mid">70.7</span></td>
+            <td><span class="status-badge status-q"><span class="status-dot"></span> Qualified</span></td>
+          </tr>
+          <tr class="anon-row">
+            <td>••••• •••</td>
+            <td>🌍</td>
+            <td>Business</td>
+            <td><span class="score-pill score-mid">61%</span></td>
+            <td><span class="score-pill score-mid">58%</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="status-badge status-e"><span class="status-dot"></span> Eliminated</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pt-note">Preview only. Full profiles and contact tools available to verified partner institutions. Student data is illustrative.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Register Interest ──────────────────────────────────── -->
+<section class="register-section" id="register">
+  <div class="register-inner">
+    <p class="section-label" style="text-align:center">Get Involved</p>
+    <h2 class="section-title reveal">Register your interest.</h2>
+    <p class="section-sub reveal">
+      Whether you're a student, an academic, a university, or a sponsor — we want to hear from you. Tell us who you are and we'll be in touch directly.
+    </p>
+
+<form name="register-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="register-interest" />
+    <div class="form-card reveal">
+      <div class="form-tabs">
+        <button class="form-tab active" onclick="switchTab('student')">I'm a Student</button>
+        <button class="form-tab" onclick="switchTab('institution')">University / Sponsor</button>
+        <button class="form-tab" onclick="switchTab('academic')">Academic / Advisor</button>
+      </div>
+
+      <div id="form-success" class="form-success">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Thank you — we'll be in touch.</div>
+        <p class="success-sub">Your registration has been received. We'll reach out with details about the founding cohort shortly.</p>
+      </div>
+
+      <!-- Student -->
+      <div id="panel-student" class="form-panel active">
+        <form onsubmit="handleSubmit(event)">
+          <input type="hidden" name="role" value="Student"/>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="first_name" placeholder="Adaeze" required/>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="last_name" placeholder="Okonkwo" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="email" placeholder="you@example.com" required/>
+            </div>
+            <div class="form-group">
+              <label>Country</label>
+              <select name="country" required>
+                <option value="">Select country…</option>
+                <option>Nigeria</option><option>Ghana</option><option>Kenya</option>
+                <option>South Africa</option><option>Uganda</option><option>Tanzania</option>
+                <option>Cameroon</option><option>Senegal</option><option>Ethiopia</option>
+                <option>Other African Country</option><option>Outside Africa</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Subject Track Interest</label>
+              <select name="track">
+                <option value="">Select track…</option>
+                <option>STEM (Science, Technology, Engineering, Maths)</option>
+                <option>Business / Social Sciences</option>
+                <option>Humanities / Arts</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Current Education Level</label>
+              <select name="level">
+                <option value="">Select level…</option>
+                <option>Secondary / A-Level / WAEC</option>
+                <option>Undergraduate</option>
+                <option>Postgraduate</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label>What are you hoping AScholar will help you achieve?</label>
+              <textarea name="goal" placeholder="e.g. I want to study engineering abroad and need help finding scholarship opportunities…"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Register as a Student →</button>
+          <p class="form-note">We will never share your information. You will receive one email confirming your registration and further updates about the founding cohort.</p>
+        </form>
+      </div>
+
+      <!-- Institution -->
+      <div id="panel-institution" class="form-panel">
+        <form onsubmit="handleSubmit(event)">
+          <input type="hidden" name="role" value="Institution"/>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" name="name" placeholder="Dr. Sarah Mensah" required/>
+            </div>
+            <div class="form-group">
+              <label>Your Title / Role</label>
+              <input type="text" name="title" placeholder="Head of International Admissions"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Institution / Organisation Name</label>
+              <input type="text" name="institution" placeholder="University of Edinburgh" required/>
+            </div>
+            <div class="form-group">
+              <label>Type</label>
+              <select name="type" required>
+                <option value="">Select type…</option>
+                <option>University / Higher Education Institution</option>
+                <option>Scholarship Organisation</option>
+                <option>Foundation / Philanthropist</option>
+                <option>Government Body</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Official Email Address</label>
+              <input type="email" name="email" placeholder="admissions@university.ac.uk" required/>
+            </div>
+            <div class="form-group">
+              <label>Country / Region</label>
+              <input type="text" name="country" placeholder="United Kingdom"/>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label>What are you most interested in exploring with AScholar?</label>
+              <textarea name="interest" placeholder="e.g. We're looking for strong STEM candidates from West Africa for our scholarship programme…"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Register as a Partner Institution →</button>
+          <p class="form-note">Founding institution partnerships are free with no commitment. We will contact you directly to discuss access to the Progression Table.</p>
+        </form>
+      </div>
+
+      <!-- Academic -->
+      <div id="panel-academic" class="form-panel">
+        <form onsubmit="handleSubmit(event)">
+          <input type="hidden" name="role" value="Academic"/>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" name="name" placeholder="Prof. Ama Owusu" required/>
+            </div>
+            <div class="form-group">
+              <label>Academic Title</label>
+              <select name="title_level">
+                <option>Professor</option>
+                <option>Associate Professor</option>
+                <option>Senior Lecturer</option>
+                <option>Lecturer / Dr.</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Institution</label>
+              <input type="text" name="institution" placeholder="University of Ghana" required/>
+            </div>
+            <div class="form-group">
+              <label>Department / Field</label>
+              <input type="text" name="field" placeholder="Mathematics / Economics / etc."/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="email" placeholder="you@university.edu" required/>
+            </div>
+            <div class="form-group">
+              <label>Subject Track You Could Advise On</label>
+              <select name="track">
+                <option value="">Select…</option>
+                <option>STEM</option>
+                <option>Business / Economics</option>
+                <option>Humanities / English</option>
+                <option>Social Sciences</option>
+                <option>Assessment Design / Education</option>
+                <option>Multiple / Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Why does this project interest you? (Optional)</label>
+              <textarea name="motivation" placeholder="e.g. I've long been concerned about how standard assessments disadvantage students from certain contexts…"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="submit-btn">Register as an Academic Advisor →</button>
+          <p class="form-note">Advisory Board membership is non-exclusive and non-binding at this stage. We will send you a full brief and schedule a conversation before any commitment is made.</p>
+        </form>
+      </div>
+    </div>
+</form>
+  </div>
+</section>
+
+<!-- ── Trust strip ───────────────────────────────────────── -->
+<section class="trust-section">
+  <div class="trust-inner">
+    <p class="trust-label">What we are building toward</p>
+    <div class="trust-items">
+      <div class="trust-item"><span class="trust-item-dot"></span>Proctored, identity-verified assessments</div>
+      <div class="trust-item"><span class="trust-item-dot"></span>Academic Advisory Board oversight</div>
+      <div class="trust-item"><span class="trust-item-dot"></span>Culturally neutral exam design</div>
+      <div class="trust-item"><span class="trust-item-dot"></span>Direct offer and invitation tools</div>
+      <div class="trust-item"><span class="trust-item-dot"></span>No cost to founding institutions</div>
+      <div class="trust-item"><span class="trust-item-dot"></span>Nigeria Data Protection Act compliant</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-logo-tagline">
+        <img src="assets/AScholar-logo.png" class="footer-logo-img"/>
+        <div class="footer-tagline">...accessing global education.</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#how">How It Works</a>
+      <a href="#who">Who It's For</a>
+      <a href="#register">Register Interest</a>
+      <a href="mailto:partnerships@ascholar.io">partnerships@ascholar.io</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2026 AScholar. Early-stage platform — founding cohort in preparation. All rights reserved.</p>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll', function(){
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Tab switching
+function switchTab(role) {
+  document.querySelectorAll('.form-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.form-panel').forEach(function(p){ p.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.getElementById('panel-' + role).classList.add('active');
+}
+
+// Form submission
+function handleSubmit(e) {
+  e.preventDefault();
+  var form = e.target;
+  var data = new FormData(form);
+  var obj = {};
+  data.forEach(function(v,k){ obj[k] = v; });
+
+  // Replace this with your Formspree endpoint:
+  fetch('https://formspree.io/f/mnjbbalb', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(obj)
+  });
+
+  // For now, show success state
+  document.querySelectorAll('.form-panel').forEach(function(p){ p.style.display='none'; });
+  document.querySelectorAll('.form-tab').forEach(function(t){ t.style.display='none'; });
+  var s = document.getElementById('form-success');
+  s.style.display = 'block';
+  s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Scroll reveal
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(function(el){
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
