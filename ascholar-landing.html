@@ -4,10 +4,9 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>AScholar — Accessing Global Education</title>
-<link rel="icon" href="/assets/AScholar Diamond icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Nunito:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ── Brand Tokens ─────────────────────────────────────────── */
 :root {
@@ -25,8 +24,8 @@
   --slate:        #1A3346;
   --muted:        #5A7A90;
   --border:       #C8DDE8;
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Nunito', system-ui, sans-serif;
   --font-mono:    'DM Mono', monospace;
 }
 
@@ -43,7 +42,7 @@ body {
 }
 
 /* ── Typography ──────────────────────────────────────────── */
-h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; letter-spacing: -0.01em; }
 
 /* ── Nav ─────────────────────────────────────────────────── */
 nav {
@@ -75,28 +74,12 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   flex-shrink: 0;
 }
 
-.nav-logo-img{
-    width: 164px; 
-    height: 40px;
-}
-
-.nav-links {
-  display: flex; gap: 64px; flex-wrap: wrap;
-}
-
-.nav-links a {
-  font-family: var(--font-display);
-  font-weight: 700; font-size: 1.2rem; 
-  color: var(--blue-mid); 
-  text-decoration: none; transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--blue-mid); }
-
 .nav-logo-text {
   font-family: var(--font-display);
-  font-weight: 700; font-size: 1.25rem;
+  font-weight: 700; font-size: 1.3rem;
   color: var(--blue-mid);
   letter-spacing: -0.01em;
+  font-style: italic;
 }
 
 .nav-tagline {
@@ -176,15 +159,16 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
   color: var(--white);
   margin-bottom: 24px;
   animation: fadeUp 0.6s 0.1s ease both;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  font-style: italic;
 }
 
 .hero h1 em {
-  font-style: italic; color: var(--yellow);
+  font-style: normal; color: var(--yellow);
 }
 
 .hero-sub {
@@ -294,9 +278,10 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
 }
 
 .section-title {
-  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-size: clamp(2.1rem, 3.8vw, 3.2rem);
   color: var(--blue-deep);
-  margin-bottom: 16px; letter-spacing: -0.02em;
+  margin-bottom: 16px; letter-spacing: -0.01em;
+  font-style: italic; font-weight: 700;
 }
 
 .section-sub {
@@ -389,7 +374,6 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
 .audience-card:nth-child(3)::before { background: var(--yellow-warm); }
 .audience-card:nth-child(4)::before { background: #10B981; }
 
-
 .audience-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(13,61,92,0.1);
@@ -407,10 +391,10 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
 .audience-card:nth-child(3) .aud-icon { background: rgba(240,240,0,0.15); }
 .audience-card:nth-child(4) .aud-icon { background: rgba(16,185,129,0.1); }
 
-
 .aud-title {
   font-family: var(--font-display);
-  font-size: 1.2rem; font-weight: 700;
+  font-size: 1.25rem; font-weight: 700;
+  font-style: italic;
   color: var(--blue-deep); margin-bottom: 10px;
 }
 
@@ -487,6 +471,7 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
 
 table.progression {
   width: 100%; border-collapse: collapse;
+  min-width: 800px; /* Force horizontal scroll on mobile */
 }
 
 .progression th {
@@ -709,39 +694,27 @@ footer {
 
 .footer-logo-text {
   font-family: var(--font-display); font-weight: 700;
-  color: var(--white); font-size: 1.1rem;
-}
-
-.footer-logo-tagline{
-  display: flex;
-  align-items: center;
-}
-
-.footer-logo-img{
-    width: 164px; 
-    height: 40px;
+  color: var(--white); font-size: 1.2rem;
+  font-style: italic;
 }
 
 .footer-tagline {
-  font-size: 0.75rem; 
-  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.75rem; color: rgba(255,255,255,0.4);
   font-style: italic;
-  margin-top: 23px;
 }
 
 .footer-links {
   display: flex; gap: 24px; flex-wrap: wrap;
-  color: rgba(255, 255, 255, 0.62);
 }
 
 .footer-links a {
-  font-size: 0.8rem;   color: rgba(255, 255, 255, 0.62);
+  font-size: 0.8rem; color: rgba(255,255,255,0.5);
   text-decoration: none; transition: color 0.2s;
 }
 .footer-links a:hover { color: var(--white); }
 
 .footer-copy {
-  font-size: 0.75rem; color: rgba(255, 255, 255, 0.62);
+  font-size: 0.75rem; color: rgba(255,255,255,0.3);
   width: 100%; text-align: center; margin-top: 20px;
   padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08);
 }
@@ -752,12 +725,12 @@ footer {
   .hero-right { display: none; }
   .rounds { grid-template-columns: 1fr 1fr; gap: 32px; }
   .rounds::before { display: none; }
-  .audience-grid { grid-template-columns: 1fr; }
-
+  .audience-grid { grid-template-columns: 1fr 1fr; }
+  
   /* Make table header and filters stack on mobile */
   .pt-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   .pt-filters { flex-wrap: wrap; }
-
+  
   /* Add scroll hint */
   .pt-table-scroll::after {
     content: '← Swipe to see all columns →';
@@ -772,17 +745,11 @@ footer {
   }
 }
 
- 
-
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr; }
   .rounds { grid-template-columns: 1fr; }
   .nav-cta { display: none; }
-  .form-tabs {
-    width: fit-content;
-    padding: 4px 0px;
-    margin-left: -18px;
-}
+  .audience-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
 }
 
 /* ── Scroll animations ───────────────────────────────────── */
@@ -798,11 +765,12 @@ footer {
 <!-- ── Nav ─────────────────────────────────────────────── -->
 <nav id="nav">
   <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">A</div>
     <div>
-      <img src="assets/AScholar-logo.png" class="nav-logo-img"/>
+      <div class="nav-logo-text">AScholar</div>
+      <span class="nav-tagline">...accessing global education.</span>
     </div>
   </a>
- 
   <a href="#register" class="nav-cta">Register Interest</a>
 </nav>
 
@@ -954,8 +922,6 @@ footer {
           <li>Shape how students prepare</li>
         </ul>
       </div>
-
-    </div>
   </div>
 </section>
 
@@ -1044,7 +1010,7 @@ footer {
           </tr>
         </tbody>
       </table>
-      <div>
+      </div>
       <div class="pt-note">Preview only. Full profiles and contact tools available to verified partner institutions. Student data is illustrative.</div>
     </div>
   </div>
@@ -1059,9 +1025,7 @@ footer {
       Whether you're a student, an academic, a university, or a sponsor — we want to hear from you. Tell us who you are and we'll be in touch directly.
     </p>
 
-<form name="register-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-  <input type="hidden" name="form-name" value="register-interest" />
-    <div class="form-card">
+    <div class="form-card reveal">
       <div class="form-tabs">
         <button class="form-tab active" onclick="switchTab('student')">I'm a Student</button>
         <button class="form-tab" onclick="switchTab('institution')">University / Sponsor</button>
@@ -1247,7 +1211,6 @@ footer {
         </form>
       </div>
     </div>
-</form>
   </div>
 </section>
 
@@ -1270,8 +1233,9 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <div class="footer-logo-tagline">
-        <img src="assets/AScholar-logo.png" class="footer-logo-img"/>
+      <div class="footer-logo-mark">A</div>
+      <div>
+        <div class="footer-logo-text">AScholar</div>
         <div class="footer-tagline">...accessing global education.</div>
       </div>
     </div>
@@ -1279,13 +1243,13 @@ footer {
       <a href="#how">How It Works</a>
       <a href="#who">Who It's For</a>
       <a href="#register">Register Interest</a>
-      <a href="mailto:partnerships@ascholar.io">partnerships@ascholar.io</a>
+      <a href="/cdn-cgi/l/email-protection#6919081b1d070c1b1a0100191a29081a0a010605081b470006"><span class="__cf_email__" data-cfemail="0a7a6b787e646f787962637a794a6b79696265666b78246365">[email&#160;protected]</span></a>
     </div>
   </div>
-  <p class="footer-copy">© 2026 AScholar. Early-stage platform — founding cohort in preparation. All rights reserved.</p>
+  <p class="footer-copy">© 2025 AScholar. Early-stage platform — founding cohort in preparation. All rights reserved.</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Nav scroll
 window.addEventListener('scroll', function(){
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
@@ -1308,10 +1272,10 @@ function handleSubmit(e) {
   data.forEach(function(v,k){ obj[k] = v; });
 
   // Replace this with your Formspree endpoint:
-  fetch('https://formspree.io/f/mnjbbalb', {
-    method: 'POST', headers: {'Content-Type':'application/json'},
-    body: JSON.stringify(obj)
-  });
+  // fetch('https://formspree.io/f/YOUR_FORM_ID', {
+  //   method: 'POST', headers: {'Content-Type':'application/json'},
+  //   body: JSON.stringify(obj)
+  // });
 
   // For now, show success state
   document.querySelectorAll('.form-panel').forEach(function(p){ p.style.display='none'; });
