@@ -31,9 +31,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: var(--font-body);
   background: var(--white);
@@ -42,7 +40,6 @@ body {
   line-height: 1.6;
 }
 
-/* ── Typography ──────────────────────────────────────────── */
 h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; }
 
 /* ── Nav ─────────────────────────────────────────────────── */
@@ -56,63 +53,21 @@ nav {
   border-bottom: 1px solid rgba(0,100,160,0.12);
   transition: box-shadow 0.3s;
 }
-
 nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
-
-.nav-logo {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
-}
-
-.nav-logo-mark {
-  width: 34px; height: 34px;
-  background: var(--yellow);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 900; font-size: 20px;
-  color: var(--blue-mid);
-  flex-shrink: 0;
-}
-
-.nav-logo-img{
-    width: 164px; 
-    height: 40px;
-}
-
-.nav-links {
-  display: flex; gap: 64px; flex-wrap: wrap;
-}
-
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo-img { width: 164px; height: 40px; }
+.nav-links { display: flex; gap: 64px; flex-wrap: wrap; }
 .nav-links a {
   font-family: var(--font-display);
-  font-weight: 700; font-size: 1.2rem; 
-  color: var(--blue-mid); 
-  text-decoration: none; transition: color 0.2s;
+  font-weight: 700; font-size: 1.2rem;
+  color: var(--blue-mid); text-decoration: none; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--blue-mid); }
-
-.nav-logo-text {
-  font-family: var(--font-display);
-  font-weight: 700; font-size: 1.25rem;
-  color: var(--blue-mid);
-  letter-spacing: -0.01em;
-}
-
-.nav-tagline {
-  font-size: 0.7rem; color: var(--muted);
-  font-style: italic; letter-spacing: 0.02em;
-  display: block; margin-top: -3px;
-}
-
 .nav-cta {
-  background: var(--blue-main);
-  color: var(--white);
+  background: var(--blue-main); color: var(--white);
   padding: 8px 20px; border-radius: 6px;
   font-size: 0.85rem; font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s, transform 0.15s;
-  white-space: nowrap;
+  text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap;
 }
 .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
 
@@ -121,12 +76,9 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   min-height: 100vh;
   display: flex; flex-direction: column; justify-content: center;
   padding: 100px 5vw 80px;
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
   background: var(--blue-deep);
 }
-
-/* Geometric background pattern */
 .hero::before {
   content: '';
   position: absolute; inset: 0;
@@ -135,8 +87,6 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
     radial-gradient(ellipse 50% 40% at 20% 80%, rgba(0,100,140,0.3) 0%, transparent 50%);
   pointer-events: none;
 }
-
-/* Diamond grid pattern */
 .hero::after {
   content: '';
   position: absolute; inset: 0;
@@ -147,12 +97,143 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   pointer-events: none;
 }
 
+/* ── Floating Gemstone Bubbles ─────────────────────────── */
+.gem-bubbles {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 1;
+  overflow: hidden;
+}
+
+.gem-bubble {
+  position: absolute;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+  backdrop-filter: blur(4px);
+  animation: float-bubble linear infinite;
+  opacity: 0;
+}
+
+.gem-bubble .gem-emoji { line-height: 1; }
+.gem-bubble .gem-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* Diamond */
+.gem-diamond {
+  width: 72px; height: 72px;
+  background: radial-gradient(circle at 35% 35%, rgba(185,242,255,0.22), rgba(120,200,255,0.08));
+  border: 1px solid rgba(185,242,255,0.35);
+  color: #b9f2ff;
+  font-size: 26px;
+  left: 78%; top: 15%;
+  animation-duration: 22s; animation-delay: 0s;
+}
+.gem-ruby {
+  width: 58px; height: 58px;
+  background: radial-gradient(circle at 35% 35%, rgba(252,100,100,0.2), rgba(239,68,68,0.07));
+  border: 1px solid rgba(252,165,165,0.35);
+  color: #fca5a5;
+  font-size: 21px;
+  left: 85%; top: 55%;
+  animation-duration: 28s; animation-delay: 3s;
+}
+.gem-sapphire {
+  width: 64px; height: 64px;
+  background: radial-gradient(circle at 35% 35%, rgba(147,197,253,0.2), rgba(59,130,246,0.07));
+  border: 1px solid rgba(147,197,253,0.35);
+  color: #93c5fd;
+  font-size: 23px;
+  left: 68%; top: 70%;
+  animation-duration: 25s; animation-delay: 7s;
+}
+.gem-tanzanite {
+  width: 52px; height: 52px;
+  background: radial-gradient(circle at 35% 35%, rgba(147,197,253,0.18), rgba(99,102,241,0.08));
+  border: 1px solid rgba(147,197,253,0.3);
+  color: #a5b4fc;
+  font-size: 19px;
+  left: 60%; top: 30%;
+  animation-duration: 32s; animation-delay: 12s;
+}
+.gem-amethyst {
+  width: 60px; height: 60px;
+  background: radial-gradient(circle at 35% 35%, rgba(196,181,253,0.2), rgba(139,92,246,0.07));
+  border: 1px solid rgba(196,181,253,0.35);
+  color: #c4b5fd;
+  font-size: 22px;
+  left: 90%; top: 30%;
+  animation-duration: 20s; animation-delay: 5s;
+}
+
+/* Extra smaller accent bubbles */
+.gem-diamond-sm {
+  width: 40px; height: 40px;
+  background: radial-gradient(circle at 35% 35%, rgba(185,242,255,0.14), rgba(120,200,255,0.05));
+  border: 1px solid rgba(185,242,255,0.2);
+  color: #b9f2ff;
+  font-size: 16px;
+  left: 55%; top: 12%;
+  animation-duration: 18s; animation-delay: 9s;
+}
+.gem-ruby-sm {
+  width: 34px; height: 34px;
+  background: radial-gradient(circle at 35% 35%, rgba(252,100,100,0.14), rgba(239,68,68,0.05));
+  border: 1px solid rgba(252,165,165,0.22);
+  color: #fca5a5;
+  font-size: 14px;
+  left: 72%; top: 85%;
+  animation-duration: 24s; animation-delay: 15s;
+}
+
+.gem-sapphire-sm {
+  width: 34px; height: 34px;
+  background: radial-gradient(circle at 35% 35%, rgba(147,197,253,0.2), rgba(59,130,246,0.07));
+  border: 1px solid rgba(147,197,253,0.35);
+  color: #93c5fd;
+  font-size: 14px;
+  left: 72%; top: 85%;
+  animation-duration: 24s; animation-delay: 15s;
+}
+
+.gem-tanzanite-sm {
+  width: 38px; height: 38px;
+  background: radial-gradient(circle at 35% 35%, rgba(196,181,253,0.14), rgba(139,92,246,0.05));
+  border: 1px solid rgba(196,181,253,0.22);
+  color: #c4b5fd;
+  font-size: 15px;
+  left: 63%; top: 55%;
+  animation-duration: 30s; animation-delay: 2s;
+}
+.gem-amethyst-sm {
+  width: 38px; height: 38px;
+  background: radial-gradient(circle at 35% 35%, rgba(196,181,253,0.14), rgba(139,92,246,0.05));
+  border: 1px solid rgba(196,181,253,0.22);
+  color: #c4b5fd;
+  font-size: 15px;
+  left: 63%; top: 55%;
+  animation-duration: 30s; animation-delay: 2s;
+}
+
+@keyframes float-bubble {
+  0%   { transform: translateY(0px) translateX(0px) scale(1); opacity: 0; }
+  5%   { opacity: 1; }
+  30%  { transform: translateY(-18px) translateX(6px) scale(1.03); opacity: 0.85; }
+  55%  { transform: translateY(-8px) translateX(-8px) scale(0.97); opacity: 0.75; }
+  80%  { transform: translateY(-22px) translateX(4px) scale(1.02); opacity: 0.85; }
+  95% { opacity: 1; }
+  100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0; }
+}
+
 .hero-inner {
   max-width: 1100px; margin: 0 auto; width: 100%;
   position: relative; z-index: 2;
   display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
 }
-
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(240,240,0,0.15);
@@ -163,46 +244,33 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   text-transform: uppercase; margin-bottom: 24px;
   animation: fadeUp 0.6s ease both;
 }
-
 .hero-badge-dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--yellow);
   animation: pulse 2s infinite;
 }
-
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.4); }
 }
-
 .hero h1 {
   font-size: clamp(2.6rem, 5vw, 4rem);
-  color: var(--white);
-  margin-bottom: 24px;
+  color: var(--white); margin-bottom: 24px;
   animation: fadeUp 0.6s 0.1s ease both;
   letter-spacing: -0.02em;
 }
-
-.hero h1 em {
-  font-style: italic; color: var(--yellow);
-}
-
+.hero h1 em { font-style: italic; color: var(--yellow); }
 .hero-sub {
   font-size: 1.05rem; color: rgba(255,255,255,0.72);
-  max-width: 460px; line-height: 1.7;
-  margin-bottom: 40px;
-  font-weight: 300;
+  max-width: 460px; line-height: 1.7; margin-bottom: 40px; font-weight: 300;
   animation: fadeUp 0.6s 0.2s ease both;
 }
-
 .hero-actions {
   display: flex; gap: 14px; flex-wrap: wrap;
   animation: fadeUp 0.6s 0.3s ease both;
 }
-
 .btn-primary {
-  background: var(--yellow);
-  color: var(--blue-deep);
+  background: var(--yellow); color: var(--blue-deep);
   padding: 13px 28px; border-radius: 8px;
   font-weight: 700; font-size: 0.95rem;
   text-decoration: none; border: none; cursor: pointer;
@@ -210,10 +278,8 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   display: inline-flex; align-items: center; gap: 8px;
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(240,240,0,0.3); }
-
 .btn-ghost {
-  background: transparent;
-  color: rgba(255,255,255,0.85);
+  background: transparent; color: rgba(255,255,255,0.85);
   padding: 13px 28px; border-radius: 8px;
   font-weight: 500; font-size: 0.95rem;
   text-decoration: none; border: 1px solid rgba(255,255,255,0.25);
@@ -222,15 +288,8 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
 }
 .btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
 
-/* Hero right — stat cards */
-.hero-right {
-  animation: fadeUp 0.6s 0.4s ease both;
-}
-
-.stat-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-}
-
+.hero-right { animation: fadeUp 0.6s 0.4s ease both; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .stat-card {
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.12);
@@ -239,186 +298,114 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   transition: background 0.2s, transform 0.2s;
 }
 .stat-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-3px); }
-
 .stat-card.accent {
   background: rgba(240,240,0,0.1);
   border-color: rgba(240,240,0,0.25);
 }
-
 .stat-num {
   font-family: var(--font-display);
   font-size: 2rem; font-weight: 900;
-  color: var(--white); line-height: 1;
-  margin-bottom: 6px;
+  color: var(--white); line-height: 1; margin-bottom: 6px;
 }
-
 .stat-card.accent .stat-num { color: var(--yellow); }
-
-.stat-label {
-  font-size: 0.78rem; color: rgba(255,255,255,0.55);
-  font-weight: 400; line-height: 1.4;
-}
-
+.stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); font-weight: 400; line-height: 1.4; }
 .stat-card.wide {
   grid-column: 1 / -1;
   display: flex; align-items: center; gap: 16px;
 }
-
 .stat-icon {
   width: 42px; height: 42px; flex-shrink: 0;
-  background: rgba(0,100,160,0.4);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
+  background: rgba(0,100,160,0.4); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
 }
-
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ── How It Works ────────────────────────────────────────── */
-.section {
-  padding: 96px 5vw;
-}
-
-.section-inner {
-  max-width: 1100px; margin: 0 auto;
-}
-
+.section { padding: 96px 5vw; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
 .section-label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem; font-weight: 500;
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--blue-main); margin-bottom: 12px;
 }
-
 .section-title {
   font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-  color: var(--blue-deep);
-  margin-bottom: 16px; letter-spacing: -0.02em;
+  color: var(--blue-deep); margin-bottom: 16px; letter-spacing: -0.02em;
 }
-
 .section-sub {
   font-size: 1rem; color: var(--muted);
-  max-width: 540px; line-height: 1.7; font-weight: 300;
-  margin-bottom: 56px;
+  max-width: 540px; line-height: 1.7; font-weight: 300; margin-bottom: 56px;
 }
-
-/* Rounds timeline */
 .rounds {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
   position: relative;
 }
-
 .rounds::before {
   content: '';
   position: absolute; top: 28px; left: 10%; right: 10%; height: 2px;
   background: linear-gradient(90deg, var(--blue-pale), var(--blue-light), var(--blue-pale));
   z-index: 0;
 }
-
-.round-item {
-  text-align: center; padding: 0 16px;
-  position: relative; z-index: 1;
-}
-
+.round-item { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
 .round-num {
   width: 56px; height: 56px; border-radius: 50%;
-  background: var(--blue-main);
-  color: var(--white);
-  font-family: var(--font-display);
-  font-weight: 900; font-size: 1.25rem;
+  background: var(--blue-main); color: var(--white);
+  font-family: var(--font-display); font-weight: 900; font-size: 1.25rem;
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 18px;
   border: 3px solid var(--white);
   box-shadow: 0 0 0 3px var(--blue-main);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .round-item:hover .round-num {
   transform: scale(1.1);
   box-shadow: 0 0 0 3px var(--blue-main), 0 6px 20px rgba(0,100,160,0.35);
 }
-
 .round-item:nth-child(4) .round-num { background: var(--blue-deep); box-shadow: 0 0 0 3px var(--blue-deep); }
-
-.round-title {
-  font-weight: 600; font-size: 0.9rem; color: var(--blue-deep);
-  margin-bottom: 6px;
-}
-
-.round-desc {
-  font-size: 0.8rem; color: var(--muted); line-height: 1.5;
-}
-
+.round-title { font-weight: 600; font-size: 0.9rem; color: var(--blue-deep); margin-bottom: 6px; }
+.round-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 .round-time {
   display: inline-block; margin-top: 8px;
   font-family: var(--font-mono); font-size: 0.7rem;
-  color: var(--blue-main);
-  background: var(--blue-pale);
+  color: var(--blue-main); background: var(--blue-pale);
   padding: 2px 8px; border-radius: 4px;
 }
 
 /* ── For Whom ─────────────────────────────────────────────── */
-.audience-section {
-  background: var(--off-white);
-  padding: 96px 5vw;
-}
-
-.audience-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-  margin-top: 0;
-}
-
+.audience-section { background: var(--off-white); padding: 96px 5vw; }
+.audience-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 0; }
 .audience-card {
-  background: var(--white);
-  border: 1px solid var(--border);
+  background: var(--white); border: 1px solid var(--border);
   border-radius: 16px; padding: 32px;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   position: relative; overflow: hidden;
 }
-
 .audience-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   background: var(--blue-main);
 }
-
 .audience-card:nth-child(2)::before { background: var(--teal); }
 .audience-card:nth-child(3)::before { background: var(--yellow-warm); }
 .audience-card:nth-child(4)::before { background: #10B981; }
-
-
 .audience-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(13,61,92,0.1);
   border-color: var(--blue-light);
 }
-
 .aud-icon {
   width: 48px; height: 48px; border-radius: 12px;
   background: var(--blue-pale);
   display: flex; align-items: center; justify-content: center;
   font-size: 22px; margin-bottom: 18px;
 }
-
 .audience-card:nth-child(2) .aud-icon { background: rgba(0,100,140,0.1); }
 .audience-card:nth-child(3) .aud-icon { background: rgba(240,240,0,0.15); }
 .audience-card:nth-child(4) .aud-icon { background: rgba(16,185,129,0.1); }
-
-
-.aud-title {
-  font-family: var(--font-display);
-  font-size: 1.2rem; font-weight: 700;
-  color: var(--blue-deep); margin-bottom: 10px;
-}
-
-.aud-desc {
-  font-size: 0.88rem; color: var(--muted); line-height: 1.65;
-  margin-bottom: 20px;
-}
-
+.aud-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 10px; }
+.aud-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
 .aud-list { list-style: none; }
 .aud-list li {
   font-size: 0.83rem; color: var(--slate);
@@ -426,18 +413,14 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   display: flex; align-items: center; gap: 8px;
 }
 .aud-list li:last-child { border-bottom: none; }
-.aud-list li::before {
-  content: '→';
-  color: var(--blue-main); font-size: 0.75rem; flex-shrink: 0;
-}
+.aud-list li::before { content: '→'; color: var(--blue-main); font-size: 0.75rem; flex-shrink: 0; }
 
-/* ── Progression Table Preview ───────────────────────────── */
+/* ── Progression Table ───────────────────────────────────── */
 .table-section {
   padding: 96px 5vw;
   background: var(--blue-deep);
   position: relative; overflow: hidden;
 }
-
 .table-section::before {
   content: '';
   position: absolute; inset: 0;
@@ -445,10 +428,72 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
                     linear-gradient(-45deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 32px 32px;
 }
-
 .table-section .section-label { color: var(--yellow); }
 .table-section .section-title { color: var(--white); }
 .table-section .section-sub { color: rgba(255,255,255,0.6); }
+
+/* ── Level Switcher Tabs ─────────────────────────────────── */
+.level-tabs-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.level-tabs-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.level-tabs {
+  display: flex; gap: 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 4px;
+}
+.level-tab {
+  padding: 8px 20px; border-radius: 7px;
+  font-size: 0.82rem; font-weight: 600; cursor: pointer;
+  border: none; background: transparent; color: rgba(255,255,255,0.45);
+  font-family: var(--font-body);
+  transition: all 0.22s ease;
+  white-space: nowrap;
+  position: relative;
+}
+.level-tab:hover:not(.active) {
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.05);
+}
+.level-tab.active {
+  background: rgba(0,100,160,0.55);
+  color: var(--white);
+  box-shadow: 0 2px 12px rgba(0,100,160,0.4);
+}
+.level-tab .level-count {
+  display: inline-block;
+  background: rgba(240,240,0,0.18);
+  color: var(--yellow);
+  font-size: 0.62rem; font-weight: 700;
+  padding: 1px 6px; border-radius: 8px;
+  margin-left: 6px;
+  font-family: var(--font-mono);
+}
+.level-tab.active .level-count {
+  background: rgba(240,240,0,0.25);
+}
+
+/* Table panels */
+.table-panel { display: none; }
+.table-panel.active { display: block; }
+
+/* Slide-in animation for panel switch */
+.table-panel.active {
+  animation: panelIn 0.3s ease both;
+}
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 .pt-wrapper {
   background: rgba(255,255,255,0.05);
@@ -456,237 +501,101 @@ nav.scrolled { box-shadow: 0 2px 24px rgba(13,61,92,0.12); }
   border-radius: 16px; overflow: hidden;
   backdrop-filter: blur(8px);
 }
-
 .pt-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: rgba(255,255,255,0.05);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-
 .pt-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px;
-  background: rgba(0,0,0,0.2);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 16px; background: rgba(0,0,0,0.2);
 }
-
-.pt-stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--yellow);
-  font-family: var(--font-mono);
-}
-
+.pt-stat-value { font-size: 1.5rem; font-weight: 700; color: var(--yellow); font-family: var(--font-mono); }
 .pt-stat-label {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 4px;
-  text-align: center;
+  font-size: 0.7rem; color: rgba(255,255,255,0.5);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin-top: 4px; text-align: center;
 }
-
-.pt-table-scroll {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
+.pt-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .pt-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px 24px;
   background: rgba(0,0,0,0.2);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-
-.pt-title {
-  font-family: var(--font-mono); font-size: 0.75rem;
-  color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase;
-}
-
-.pt-filters {
-  display: flex; gap: 8px;
-}
-
+.pt-title { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+.pt-filters { display: flex; gap: 8px; }
 .pt-filter-tag {
-  background: rgba(0,100,160,0.3);
-  border: 1px solid rgba(0,100,160,0.5);
+  background: rgba(0,100,160,0.3); border: 1px solid rgba(0,100,160,0.5);
   color: var(--blue-light); font-size: 0.68rem;
   padding: 3px 10px; border-radius: 12px; font-weight: 500;
 }
-
-table.progression {
-  width: 100%; border-collapse: collapse;
-}
-
+table.progression { width: 100%; border-collapse: collapse; }
 .progression th {
   padding: 12px 16px; text-align: left;
   font-family: var(--font-mono); font-size: 0.7rem;
-  color: rgba(255,255,255,0.4); letter-spacing: 0.06em;
-  text-transform: uppercase; font-weight: 500;
+  color: rgba(255,255,255,0.4); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
-
 .progression td {
   padding: 14px 16px; font-size: 0.85rem;
   color: rgba(255,255,255,0.82);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-
 .progression tr:hover td { background: rgba(255,255,255,0.04); }
-
-.score-pill {
-  display: inline-block;
-  padding: 2px 10px; border-radius: 10px;
-  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500;
-}
-
+.score-pill { display: inline-block; padding: 2px 10px; border-radius: 10px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500; }
 .score-high { background: rgba(16,185,129,0.15); color: #34D399; }
 .score-mid  { background: rgba(0,100,160,0.25); color: var(--blue-light); }
 .score-low  { background: rgba(239,68,68,0.15); color: #FCA5A5; }
 .score-pend { background: rgba(240,240,0,0.1); color: var(--yellow); }
-
-.status-badge {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 3px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600;
-}
+.status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
 .status-q  { background: rgba(16,185,129,0.15); color: #34D399; }
 .status-p  { background: rgba(240,240,0,0.12); color: var(--yellow); }
 .status-e  { background: rgba(239,68,68,0.15); color: #FCA5A5; }
-
 .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-
-/* Tier Badges */
-.tier-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 0.72rem; font-weight: 600;
-  padding: 3px 10px; border-radius: 10px;
-  white-space: nowrap;
-}
-
-.tier-diamond {
-  background: linear-gradient(135deg, rgba(185, 242, 255, 0.2), rgba(147, 197, 253, 0.2));
-  border: 1px solid rgba(185, 242, 255, 0.3);
-  color: #b9f2ff;
-}
-
-.tier-ruby {
-  background: linear-gradient(135deg, rgba(252, 165, 165, 0.2), rgba(239, 68, 68, 0.2));
-  border: 1px solid rgba(252, 165, 165, 0.3);
-  color: #fca5a5;
-}
-
-.tier-sapphire {
-  background: linear-gradient(135deg, rgba(147, 197, 253, 0.2), rgba(59, 130, 246, 0.2));
-  border: 1px solid rgba(147, 197, 253, 0.3);
-  color: #93c5fd;
-}
-
-.tier-tanzanite {
-  background: linear-gradient(135deg, rgba(196, 181, 253, 0.2), rgba(139, 92, 246, 0.2));
-  border: 1px solid rgba(196, 181, 253, 0.3);
-  color: #c4b5fd;
-}
-
-.tier-amethyst {
-  background: linear-gradient(135deg, rgba(233, 213, 255, 0.2), rgba(192, 132, 252, 0.2));
-  border: 1px solid rgba(233, 213, 255, 0.3);
-  color: #e9d5ff;
-}
-
-.tier-none {
-  background: rgba(100, 100, 100, 0.1);
-  border: 1px solid rgba(100, 100, 100, 0.2);
-  color: rgba(255, 255, 255, 0.3);
-}
-
+.tier-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 10px; white-space: nowrap; }
+.tier-diamond { background: linear-gradient(135deg, rgba(185,242,255,0.2), rgba(147,197,253,0.2)); border: 1px solid rgba(185,242,255,0.3); color: #b9f2ff; }
+.tier-ruby { background: linear-gradient(135deg, rgba(252,165,165,0.2), rgba(239,68,68,0.2)); border: 1px solid rgba(252,165,165,0.3); color: #fca5a5; }
+.tier-sapphire { background: linear-gradient(135deg, rgba(147,197,253,0.2), rgba(59,130,246,0.2)); border: 1px solid rgba(147,197,253,0.3); color: #93c5fd; }
+.tier-tanzanite { background: linear-gradient(135deg, rgba(196,181,253,0.2), rgba(139,92,246,0.2)); border: 1px solid rgba(196,181,253,0.3); color: #c4b5fd; }
+.tier-amethyst { background: linear-gradient(135deg, rgba(233,213,255,0.2), rgba(192,132,252,0.2)); border: 1px solid rgba(233,213,255,0.3); color: #e9d5ff; }
+.tier-none { background: rgba(100,100,100,0.1); border: 1px solid rgba(100,100,100,0.2); color: rgba(255,255,255,0.3); }
 .pt-note {
   padding: 12px 24px;
   background: rgba(0,0,0,0.15);
   border-top: 1px solid rgba(255,255,255,0.06);
-  font-size: 0.75rem; color: rgba(255, 255, 255, 0.62);
-  font-style: italic;
+  font-size: 0.75rem; color: rgba(255,255,255,0.62); font-style: italic;
 }
 
 /* ── Register Interest Form ───────────────────────────────── */
-.register-section {
-  padding: 96px 5vw;
-  background: var(--white);
-}
-
-.register-inner {
-  max-width: 680px; margin: 0 auto; text-align: center;
-}
-
+.register-section { padding: 96px 5vw; background: var(--white); }
+.register-inner { max-width: 680px; margin: 0 auto; text-align: center; }
 .register-inner .section-title { margin-bottom: 12px; }
 .register-inner .section-sub { margin: 0 auto 48px; }
-
-.form-card {
-  background: var(--off-white);
-  border: 1px solid var(--border);
-  border-radius: 20px; padding: 40px;
-  text-align: left;
-}
-
-.form-tabs {
-  display: flex; gap: 0; margin-bottom: 32px;
-  background: var(--border); border-radius: 8px; padding: 3px;
-}
-
-.form-tab {
-  flex: 1; padding: 8px 16px; border-radius: 6px;
-  font-size: 0.85rem; font-weight: 600; cursor: pointer;
-  text-align: center; transition: all 0.2s;
-  border: none; background: transparent; color: var(--muted);
-}
-
-.form-tab.active {
-  background: var(--white); color: var(--blue-deep);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
+.form-card { background: var(--off-white); border: 1px solid var(--border); border-radius: 20px; padding: 40px; text-align: left; }
+.form-tabs { display: flex; gap: 0; margin-bottom: 32px; background: var(--border); border-radius: 8px; padding: 3px; }
+.form-tab { flex: 1; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.2s; border: none; background: transparent; color: var(--muted); }
+.form-tab.active { background: var(--white); color: var(--blue-deep); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
 .form-panel { display: none; }
 .form-panel.active { display: block; }
-
-.form-row {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  margin-bottom: 16px;
-}
-
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .form-row.full { grid-template-columns: 1fr; }
-
 .form-group { display: flex; flex-direction: column; gap: 6px; }
-
-label {
-  font-size: 0.8rem; font-weight: 600;
-  color: var(--blue-deep); letter-spacing: 0.02em;
-}
-
+label { font-size: 0.8rem; font-weight: 600; color: var(--blue-deep); letter-spacing: 0.02em; }
 input, select, textarea {
   padding: 10px 14px; border-radius: 8px;
   border: 1.5px solid var(--border);
   background: var(--white); color: var(--slate);
   font-family: var(--font-body); font-size: 0.88rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  outline: none;
-  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%;
 }
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--blue-main);
-  box-shadow: 0 0 0 3px rgba(0,100,160,0.1);
-}
-
+input:focus, select:focus, textarea:focus { border-color: var(--blue-main); box-shadow: 0 0 0 3px rgba(0,100,160,0.1); }
 textarea { resize: vertical; min-height: 90px; }
-
 select { appearance: none; cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7A90' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 12px center;
-  padding-right: 36px;
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px;
 }
-
 .submit-btn {
   width: 100%; padding: 14px;
   background: var(--blue-main); color: var(--white);
@@ -696,129 +605,37 @@ select { appearance: none; cursor: pointer;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
-
-.submit-btn:hover {
-  background: var(--blue-deep);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0,100,160,0.3);
-}
-
-.form-note {
-  font-size: 0.75rem; color: var(--muted); text-align: center;
-  margin-top: 14px; line-height: 1.5;
-}
-
-/* Success state */
-.form-success {
-  display: none; text-align: center; padding: 32px 0;
-}
-
+.submit-btn:hover { background: var(--blue-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,100,160,0.3); }
+.form-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.5; }
+.form-success { display: none; text-align: center; padding: 32px 0; }
 .success-icon {
   width: 64px; height: 64px; border-radius: 50%;
   background: rgba(16,185,129,0.1); border: 2px solid #10B981;
   display: flex; align-items: center; justify-content: center;
   font-size: 28px; margin: 0 auto 20px;
 }
-
-.success-title {
-  font-family: var(--font-display); font-size: 1.5rem;
-  color: var(--blue-deep); margin-bottom: 8px;
-}
-
+.success-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--blue-deep); margin-bottom: 8px; }
 .success-sub { font-size: 0.9rem; color: var(--muted); }
 
-/* ── Partners / Trust strip ──────────────────────────────── */
-.trust-section {
-  padding: 56px 5vw;
-  background: var(--off-white);
-  border-top: 1px solid var(--border);
-}
-
-.trust-inner {
-  max-width: 1100px; margin: 0 auto; text-align: center;
-}
-
-.trust-label {
-  font-family: var(--font-mono); font-size: 0.7rem;
-  color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
-  margin-bottom: 28px;
-}
-
-.trust-items {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
-}
-
-.trust-item {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 8px; padding: 10px 20px;
-  font-size: 0.82rem; font-weight: 600; color: var(--muted);
-  display: flex; align-items: center; gap: 8px;
-}
-
+/* ── Trust strip ──────────────────────────────────────────── */
+.trust-section { padding: 56px 5vw; background: var(--off-white); border-top: 1px solid var(--border); }
+.trust-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+.trust-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px; }
+.trust-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.trust-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 10px 20px; font-size: 0.82rem; font-weight: 600; color: var(--muted); display: flex; align-items: center; gap: 8px; }
 .trust-item-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-main); }
 
 /* ── Footer ──────────────────────────────────────────────── */
-footer {
-  background: var(--slate);
-  padding: 40px 5vw;
-  border-top: 3px solid var(--yellow-warm);
-}
-
-.footer-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 20px;
-}
-
-.footer-logo {
-  display: flex; align-items: center; gap: 10px;
-}
-
-.footer-logo-mark {
-  width: 30px; height: 30px; background: var(--yellow);
-  border-radius: 5px; display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-weight: 900; font-size: 17px;
-  color: var(--blue-deep);
-}
-
-.footer-logo-text {
-  font-family: var(--font-display); font-weight: 700;
-  color: var(--white); font-size: 1.1rem;
-}
-
-.footer-logo-tagline{
-  display: flex;
-  align-items: center;
-}
-
-.footer-logo-img{
-    width: 164px; 
-    height: 40px;
-}
-
-.footer-tagline {
-  font-size: 0.75rem; 
-  color: rgba(255, 255, 255, 0.62);
-  font-style: italic;
-  margin-top: 23px;
-}
-
-.footer-links {
-  display: flex; gap: 24px; flex-wrap: wrap;
-  color: rgba(255, 255, 255, 0.62);
-}
-
-.footer-links a {
-  font-size: 0.8rem;   color: rgba(255, 255, 255, 0.62);
-  text-decoration: none; transition: color 0.2s;
-}
+footer { background: var(--slate); padding: 40px 5vw; border-top: 3px solid var(--yellow-warm); }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-logo-tagline { display: flex; align-items: center; }
+.footer-logo-img { width: 164px; height: 40px; }
+.footer-tagline { font-size: 0.75rem; color: rgba(255,255,255,0.62); font-style: italic; margin-top: 23px; }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; color: rgba(255,255,255,0.62); }
+.footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.62); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--white); }
-
-.footer-copy {
-  font-size: 0.75rem; color: rgba(255, 255, 255, 0.62);
-  width: 100%; text-align: center; margin-top: 20px;
-  padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08);
-}
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.62); width: 100%; text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -827,52 +644,31 @@ footer {
   .rounds { grid-template-columns: 1fr 1fr; gap: 32px; }
   .rounds::before { display: none; }
   .audience-grid { grid-template-columns: 1fr; }
-
-   /* Make live stats grid 2x2 on mobile */
-  .pt-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Make table header and filters stack on mobile */
+  .pt-stats { grid-template-columns: repeat(2, 1fr); }
   .pt-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   .pt-filters { flex-wrap: wrap; }
-
-  /* Add scroll hint */
+  .level-tabs-wrapper { flex-direction: column; align-items: flex-start; }
   .pt-table-scroll::after {
     content: '← Swipe to see all columns →';
-    display: block;
-    text-align: center;
-    background: rgba(240,240,0,0.15);
-    color: var(--yellow);
-    padding: 8px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    display: block; text-align: center;
+    background: rgba(240,240,0,0.15); color: var(--yellow);
+    padding: 8px; font-size: 0.7rem; font-weight: 600;
     border-top: 1px solid rgba(240,240,0,0.3);
   }
 }
-
- 
-
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr; }
   .rounds { grid-template-columns: 1fr; }
   .nav-cta { display: none; }
-  .status-badge{width: fit-content;}
-  .form-tabs {
-    width: fit-content;
-    padding: 4px 0px;
-    margin-left: -12px;
-}
-.footer-tagline{
-  width: 90%;
-}
+  .status-badge { width: fit-content; }
+  .form-tabs { width: fit-content; padding: 4px 0px; margin-left: -12px; }
+  .footer-tagline { width: 90%; }
+  .level-tabs { flex-direction: column; width: 100%; }
+  .level-tab { text-align: left; }
 }
 
 /* ── Scroll animations ───────────────────────────────────── */
-.reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
@@ -881,16 +677,44 @@ footer {
 <!-- ── Nav ─────────────────────────────────────────────── -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <div>
-      <img src="assets/AScholar-logo.png" class="nav-logo-img"/>
-    </div>
+    <div><img src="assets/AScholar-logo.png" class="nav-logo-img"/></div>
   </a>
- 
   <a href="#register" class="nav-cta">Register Interest</a>
 </nav>
 
 <!-- ── Hero ────────────────────────────────────────────── -->
 <section class="hero">
+
+  <!-- Floating Gemstone Bubbles -->
+  <div class="gem-bubbles">
+    <div class="gem-bubble gem-diamond">
+      <span class="gem-emoji">💎</span>
+      <span class="gem-label">Diamond</span>
+    </div>
+    <div class="gem-bubble gem-ruby">
+      <span class="gem-emoji">🔴</span>
+      <span class="gem-label">Ruby</span>
+    </div>
+    <div class="gem-bubble gem-sapphire">
+      <span class="gem-emoji">🔵</span>
+      <span class="gem-label">Sapphire</span>
+    </div>
+    <div class="gem-bubble gem-tanzanite">
+      <span class="gem-emoji">🔷</span>
+      <span class="gem-label">Tanzanite</span>
+    </div>
+    <div class="gem-bubble gem-amethyst">
+      <span class="gem-emoji">🟣</span>
+      <span class="gem-label">Amethyst</span>
+    </div>
+    <!-- Smaller accent bubbles (no label) -->
+    <div class="gem-bubble gem-diamond-sm"><span class="gem-emoji">💎</span></div>
+    <div class="gem-bubble gem-ruby-sm"><span class="gem-emoji">🔴</span></div>
+    <!-- <div class="gem-bubble gem-sapphire-sm"><span class="gem-emoji">🔵</span></div>
+    <div class="gem-bubble gem-tanzanite-sm"><span class="gem-emoji">🔷</span></div> -->
+    <div class="gem-bubble gem-amethyst-sm"><span class="gem-emoji">🟣</span></div>
+  </div>
+
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-badge">
@@ -902,13 +726,8 @@ footer {
         AScholar connects high-potential students from emerging markets with international universities and scholarship organisations — through a rigorous, standardised, multi-round assessment that anyone can trust.
       </p>
       <div class="hero-actions">
-        <a href="#register" class="btn-primary">
-          Register Your Interest
-          <span>→</span>
-        </a>
-        <a href="#how" class="btn-ghost">
-          How It Works
-        </a>
+        <a href="#register" class="btn-primary">Register Your Interest <span>→</span></a>
+        <a href="#how" class="btn-ghost">How It Works</a>
       </div>
     </div>
 
@@ -950,11 +769,10 @@ footer {
     <p class="section-sub reveal">
       Each cohort runs through up to four progressive rounds. Students are ranked on a Progression Table that universities and sponsors can access directly — no cold applications, no guesswork.
     </p>
-
     <div class="rounds reveal">
       <div class="round-item">
         <div class="round-num">1</div>
-        <div class="round-title">Eligibility & Readiness</div>
+        <div class="round-title">Eligibility &amp; Readiness</div>
         <div class="round-desc">English comprehension, logical reasoning, quantitative literacy</div>
         <span class="round-time">45 – 60 min</span>
       </div>
@@ -972,7 +790,7 @@ footer {
       </div>
       <div class="round-item">
         <div class="round-num">4</div>
-        <div class="round-title">Essay & Interview</div>
+        <div class="round-title">Essay &amp; Interview</div>
         <div class="round-desc">Structured written response, expert-reviewed with rubric</div>
         <span class="round-time">Manual review</span>
       </div>
@@ -985,11 +803,8 @@ footer {
   <div class="section-inner">
     <p class="section-label reveal">Who It's For</p>
     <h2 class="section-title reveal">Built for every side of the equation.</h2>
-    <p class="section-sub reveal">
-      AScholar serves four groups — each with a distinct role in turning academic potential into real opportunity.
-    </p>
+    <p class="section-sub reveal">AScholar serves four groups — each with a distinct role in turning academic potential into real opportunity.</p>
     <div class="audience-grid">
-
       <div class="audience-card reveal">
         <div class="aud-icon">🎓</div>
         <div class="aud-title">Students</div>
@@ -1001,10 +816,9 @@ footer {
           <li>Access learning content and exam prep</li>
         </ul>
       </div>
-
       <div class="audience-card reveal">
         <div class="aud-icon">🏛️</div>
-        <div class="aud-title">Universities & Admission Officers</div>
+        <div class="aud-title">Universities &amp; Admission Officers</div>
         <p class="aud-desc">Institutions looking to discover academically ready international candidates — without the noise of unverified cold applications.</p>
         <ul class="aud-list">
           <li>Access the ranked Progression Table</li>
@@ -1013,7 +827,6 @@ footer {
           <li>Zero cost for founding partners</li>
         </ul>
       </div>
-
       <div class="audience-card reveal">
         <div class="aud-icon">💰</div>
         <div class="aud-title">Scholarship Sponsors</div>
@@ -1025,10 +838,9 @@ footer {
           <li>Full audit trail on all offers</li>
         </ul>
       </div>
-
       <div class="audience-card reveal">
         <div class="aud-icon">📚</div>
-        <div class="aud-title">Teachers & Educators</div>
+        <div class="aud-title">Teachers &amp; Educators</div>
         <p class="aud-desc">Subject experts who create the content that prepares students for the assessment — and earn revenue as their teaching reaches a global audience.</p>
         <ul class="aud-list">
           <li>Publish courses, notes, and videos</li>
@@ -1037,7 +849,6 @@ footer {
           <li>Shape how students prepare</li>
         </ul>
       </div>
-
     </div>
   </div>
 </section>
@@ -1049,190 +860,224 @@ footer {
     <h2 class="section-title reveal">The ranking universities actually trust.</h2>
     <p class="section-sub reveal">
       The Progression Table updates in real-time as students complete each round. See your tier, rank, and status immediately after every exam — no waiting, no wondering. Your cumulative performance determines your Scholar Tier, from 💎 Diamond to 🟣 Amethyst, and institutions watch the rankings unfold live.
-      The data is structured, scored, and independently assessed.
     </p>
 
-    <div class="pt-wrapper reveal">
-      <div class="pt-stats">
-        <div class="pt-stat">
-          <span class="pt-stat-value">1,247</span>
-          <span class="pt-stat-label">Students Enrolled</span>
-        </div>
-        <div class="pt-stat">
-          <span class="pt-stat-value">892</span>
-          <span class="pt-stat-label">Completed R3</span>
-        </div>
-        <div class="pt-stat">
-          <span class="pt-stat-value">4d 18h</span>
-          <span class="pt-stat-label">Window Closes In</span>
-        </div>
-        <div class="pt-stat">
-          <span class="pt-stat-value">67%</span>
-          <span class="pt-stat-label">Advancement Rate</span>
-        </div>
+    <!-- Level Switcher -->
+    <div class="level-tabs-wrapper reveal">
+      <span class="level-tabs-label">Study Level</span>
+      <div class="level-tabs">
+        <button class="level-tab active" onclick="switchLevel(event, 'undergrad')">
+          Undergraduate <span class="level-count">892</span>
+        </button>
+        <button class="level-tab" onclick="switchLevel(event, 'postgrad')">
+          Postgraduate <span class="level-count">271</span>
+        </button>
+        <button class="level-tab" onclick="switchLevel(event, 'phd')">
+          PhD <span class="level-count">84</span>
+        </button>
       </div>
-      <div class="pt-header">
-        <span class="pt-title">🔴 Cohort 1 — Round 3 Live Standings · Updated 2 min ago</span>
-        <div class="pt-filters">
-          <span class="pt-filter-tag">All Countries</span>
-          <span class="pt-filter-tag">All Tracks</span>
-          <span class="pt-filter-tag">Qualified Only</span>
-        </div>
-      </div>
-      <div class="pt-table-scroll">
-       <table class="progression">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Candidate</th>
-            <th>Country</th>
-            <th>Track</th>
-            <th>R1</th>
-            <th>R2</th>
-            <th>R3</th>
-            <th>Cumulative</th>
-            <th>Tier</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>#1</strong></td>
-            <td><strong>Chinedu E.</strong></td>
-            <td>🇳🇬 Nigeria</td>
-            <td>STEM</td>
-            <td><span class="score-pill score-high">95%</span></td>
-            <td><span class="score-pill score-high">92%</span></td>
-            <td><span class="score-pill score-high">91%</span></td>
-            <td><span class="score-pill score-high">92.5%</span></td>
-            <td><span class="tier-badge tier-diamond">💎 Diamond</span></td>
-            <td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
-          </tr>
-          <tr>
-            <td><strong>#12</strong></td>
-            <td><strong>Adaeze O.</strong></td>
-            <td>🇳🇬 Nigeria</td>
-            <td>STEM</td>
-            <td><span class="score-pill score-high">91%</span></td>
-            <td><span class="score-pill score-high">88%</span></td>
-            <td><span class="score-pill score-high">85%</span></td>
-            <td><span class="score-pill score-high">87.5%</span></td>
-            <td><span class="tier-badge tier-ruby">🔴 Ruby</span></td>
-            <td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
-          </tr>
-          <tr>
-            <td><strong>#23</strong></td>
-            <td><strong>Kwame A.</strong></td>
-            <td>🇬🇭 Ghana</td>
-            <td>Business</td>
-            <td><span class="score-pill score-high">84%</span></td>
-            <td><span class="score-pill score-high">82%</span></td>
-            <td><span class="score-pill score-mid">79%</span></td>
-            <td><span class="score-pill score-high">81.3%</span></td>
-            <td><span class="tier-badge tier-ruby">🔴 Ruby</span></td>
-            <td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
-          </tr>
-          <tr>
-            <td><strong>#234</strong></td>
-            <td><strong>Amara N.</strong></td>
-            <td>🇳🇬 Nigeria</td>
-            <td>Humanities</td>
-            <td><span class="score-pill score-mid">74%</span></td>
-            <td><span class="score-pill score-mid">72%</span></td>
-            <td><span class="score-pill score-mid">70%</span></td>
-            <td><span class="score-pill score-mid">71.4%</span></td>
-            <td><span class="tier-badge tier-sapphire">🔵 Sapphire</span></td>
-            <td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
-          </tr>
-          <tr>
-            <td><strong>#456</strong></td>
-            <td><strong>Thandiwe M.</strong></td>
-            <td>🇿🇦 South Africa</td>
-            <td>Business</td>
-            <td><span class="score-pill score-mid">68%</span></td>
-            <td><span class="score-pill score-mid">65%</span></td>
-            <td><span class="score-pill score-mid">67%</span></td>
-            <td><span class="score-pill score-mid">66.2%</span></td>
-            <td><span class="tier-badge tier-tanzanite">🔷 Tanzanite</span></td>
-            <td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
-          </tr>
-          <tr>
-            <td><strong>#567</strong></td>
-            <td><strong>Kofi M.</strong></td>
-            <td>🇬🇭 Ghana</td>
-            <td>STEM</td>
-            <td><span class="score-pill score-mid">58%</span></td>
-            <td><span class="score-pill score-mid">65%</span></td>
-            <td><span class="score-pill score-mid">70%</span></td>
-            <td><span class="score-pill score-mid">66.1%</span></td>
-            <td><span class="tier-badge tier-tanzanite">🔷 Tanzanite</span></td>
-            <td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
-          </tr>
-          <tr>
-            <td style="color: rgba(247, 215, 8, 0.957);">⏳</td>
-            <td><strong>Fatima K.</strong></td>
-            <td>🇰🇪 Kenya</td>
-            <td>Business</td>
-            <td><span class="score-pill score-high">79%</span></td>
-            <td><span class="score-pill score-mid">76%</span></td>
-            <td><span class="score-pill score-pend">—</span></td>
-            <td><span class="score-pill score-pend">—</span></td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="status-badge status-p"><span class="status-dot"></span>Pending'R3</span></td>
-          </tr>
-          <tr class="anon-row">
-            <td><strong>#789</strong></td>
-            <td>••••• •••</td>
-            <td>🌍</td>
-            <td>Humanities</td>
-            <td><span class="score-pill score-mid">50%</span></td>
-            <td><span class="score-pill score-mid">60%</span></td>
-            <td><span class="score-pill score-mid">65%</span></td>
-            <td><span class="score-pill score-mid">59.5%</span></td>
-            <td><span class="tier-badge tier-amethyst">🟣 Amethyst</span></td>
-            <td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
-          </tr>
-          <tr class="anon-row">
-            <td style="color: rgb(255, 68, 68);">❌</td>
-            <td>••••• •••</td>
-            <td>🌍</td>
-            <td>Business</td>
-            <td><span class="score-pill score-mid">72%</span></td>
-            <td><span class="score-pill score-mid">68%</span></td>
-            <td><span class="score-pill score-low">58%</span></td>
-            <td>—</td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="status-badge status-e"><span class="status-dot"></span> Dropped</span></td>
-          </tr>
-          <tr class="anon-row">
-            <td style="color: rgb(255, 68, 68);">❌</td>
-            <td>••••• •••</td>
-            <td>🌍</td>
-            <td>STEM</td>
-            <td><span class="score-pill score-mid">57%</span></td>
-            <td><span class="score-pill score-low">59%</span></td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="status-badge status-e"><span class="status-dot"></span> Dropped</span></td>
-          </tr>
-          <tr class="anon-row">
-            <td style="color: rgb(255, 68, 68);">❌</td>
-            <td>••••• •••</td>
-            <td>🌍</td>
-            <td>Business</td>
-            <td><span class="score-pill score-low">47%</span></td>
-            <td>—</td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="tier-badge tier-none">—</span></td>
-            <td><span class="status-badge status-e"><span class="status-dot"></span> Dropped</span></td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-      <div class="pt-note">Preview only. Scholar Tiers: 💎 Diamond (90-100%), 🔴 Ruby (80-89%), 🔵 Sapphire (70-79%), 🔷 Tanzanite (60-69%), 🟣 Amethyst (50-59%). Round thresholds: R1 ≥50%, R2 ≥60%, R3 ≥65%. Cumulative = (R1×25%) + (R2×35%) + (R3×40%). Ranks update in real-time. Full profiles available to verified institutions. Student data is illustrative.</div>
     </div>
+
+    <!-- ── Undergraduate Table ── -->
+    <div id="panel-undergrad" class="table-panel active reveal">
+      <div class="pt-wrapper">
+        <div class="pt-stats">
+          <div class="pt-stat"><span class="pt-stat-value">892</span><span class="pt-stat-label">Enrolled</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">647</span><span class="pt-stat-label">Completed R3</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">4d 18h</span><span class="pt-stat-label">Window Closes</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">67%</span><span class="pt-stat-label">Advancement Rate</span></div>
+        </div>
+        <div class="pt-header">
+          <span class="pt-title">🔴 Cohort 1 — Undergraduate · Round 3 Live · Updated 2 min ago</span>
+          <div class="pt-filters">
+            <span class="pt-filter-tag">All Countries</span>
+            <span class="pt-filter-tag">All Tracks</span>
+            <span class="pt-filter-tag">Qualified Only</span>
+          </div>
+        </div>
+        <div class="pt-table-scroll">
+          <table class="progression">
+            <thead>
+              <tr><th>Rank</th><th>Candidate</th><th>Country</th><th>Track</th><th>R1</th><th>R2</th><th>R3</th><th>Cumulative</th><th>Tier</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#1</strong></td><td><strong>Chinedu E.</strong></td><td>🇳🇬 Nigeria</td><td>STEM</td>
+                <td><span class="score-pill score-high">95%</span></td><td><span class="score-pill score-high">92%</span></td><td><span class="score-pill score-high">91%</span></td><td><span class="score-pill score-high">92.5%</span></td>
+                <td><span class="tier-badge tier-diamond">💎 Diamond</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#12</strong></td><td><strong>Adaeze O.</strong></td><td>🇳🇬 Nigeria</td><td>STEM</td>
+                <td><span class="score-pill score-high">91%</span></td><td><span class="score-pill score-high">88%</span></td><td><span class="score-pill score-high">85%</span></td><td><span class="score-pill score-high">87.5%</span></td>
+                <td><span class="tier-badge tier-ruby">🔴 Ruby</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#23</strong></td><td><strong>Kwame A.</strong></td><td>🇬🇭 Ghana</td><td>Business</td>
+                <td><span class="score-pill score-high">84%</span></td><td><span class="score-pill score-high">82%</span></td><td><span class="score-pill score-mid">79%</span></td><td><span class="score-pill score-high">81.3%</span></td>
+                <td><span class="tier-badge tier-ruby">🔴 Ruby</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#234</strong></td><td><strong>Amara N.</strong></td><td>🇳🇬 Nigeria</td><td>Humanities</td>
+                <td><span class="score-pill score-mid">74%</span></td><td><span class="score-pill score-mid">72%</span></td><td><span class="score-pill score-mid">70%</span></td><td><span class="score-pill score-mid">71.4%</span></td>
+                <td><span class="tier-badge tier-sapphire">🔵 Sapphire</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#456</strong></td><td><strong>Thandiwe M.</strong></td><td>🇿🇦 South Africa</td><td>Business</td>
+                <td><span class="score-pill score-mid">68%</span></td><td><span class="score-pill score-mid">65%</span></td><td><span class="score-pill score-mid">67%</span></td><td><span class="score-pill score-mid">66.2%</span></td>
+                <td><span class="tier-badge tier-tanzanite">🔷 Tanzanite</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#567</strong></td><td><strong>Kofi M.</strong></td><td>🇬🇭 Ghana</td><td>STEM</td>
+                <td><span class="score-pill score-mid">58%</span></td><td><span class="score-pill score-mid">65%</span></td><td><span class="score-pill score-mid">70%</span></td><td><span class="score-pill score-mid">66.1%</span></td>
+                <td><span class="tier-badge tier-tanzanite">🔷 Tanzanite</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgba(247,215,8,0.957);">⏳</td><td><strong>Fatima K.</strong></td><td>🇰🇪 Kenya</td><td>Business</td>
+                <td><span class="score-pill score-high">79%</span></td><td><span class="score-pill score-mid">76%</span></td><td><span class="score-pill score-pend">—</span></td><td><span class="score-pill score-pend">—</span></td>
+                <td><span class="tier-badge tier-none">—</span></td><td><span class="status-badge status-p"><span class="status-dot"></span> Pending R3</span></td>
+              </tr>
+              <tr>
+                <td><strong>#789</strong></td><td>••••• •••</td><td>🌍</td><td>Humanities</td>
+                <td><span class="score-pill score-mid">50%</span></td><td><span class="score-pill score-mid">60%</span></td><td><span class="score-pill score-mid">65%</span></td><td><span class="score-pill score-mid">59.5%</span></td>
+                <td><span class="tier-badge tier-amethyst">🟣 Amethyst</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgb(255,68,68);">❌</td><td>••••• •••</td><td>🌍</td><td>Business</td>
+                <td><span class="score-pill score-mid">72%</span></td><td><span class="score-pill score-mid">68%</span></td><td><span class="score-pill score-low">58%</span></td><td>—</td>
+                <td><span class="tier-badge tier-none">—</span></td><td><span class="status-badge status-e"><span class="status-dot"></span> Dropped</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pt-note">Preview only. Scholar Tiers: 💎 Diamond (90–100%), 🔴 Ruby (80–89%), 🔵 Sapphire (70–79%), 🔷 Tanzanite (60–69%), 🟣 Amethyst (50–59%). Cumulative = (R1×25%) + (R2×35%) + (R3×40%). Student data is illustrative.</div>
+      </div>
+    </div>
+
+    <!-- ── Postgraduate Table ── -->
+    <div id="panel-postgrad" class="table-panel">
+      <div class="pt-wrapper">
+        <div class="pt-stats">
+          <div class="pt-stat"><span class="pt-stat-value">271</span><span class="pt-stat-label">Enrolled</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">198</span><span class="pt-stat-label">Completed R3</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">4d 18h</span><span class="pt-stat-label">Window Closes</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">73%</span><span class="pt-stat-label">Advancement Rate</span></div>
+        </div>
+        <div class="pt-header">
+          <span class="pt-title">🔴 Cohort 1 — Postgraduate · Round 3 Live · Updated 2 min ago</span>
+          <div class="pt-filters">
+            <span class="pt-filter-tag">All Countries</span>
+            <span class="pt-filter-tag">All Tracks</span>
+            <span class="pt-filter-tag">Qualified Only</span>
+          </div>
+        </div>
+        <div class="pt-table-scroll">
+          <table class="progression">
+            <thead>
+              <tr><th>Rank</th><th>Candidate</th><th>Country</th><th>Track</th><th>R1</th><th>R2</th><th>R3</th><th>Cumulative</th><th>Tier</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#1</strong></td><td><strong>Ngozi A.</strong></td><td>🇳🇬 Nigeria</td><td>Business</td>
+                <td><span class="score-pill score-high">97%</span></td><td><span class="score-pill score-high">94%</span></td><td><span class="score-pill score-high">93%</span></td><td><span class="score-pill score-high">94.6%</span></td>
+                <td><span class="tier-badge tier-diamond">💎 Diamond</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#5</strong></td><td><strong>Emeka B.</strong></td><td>🇳🇬 Nigeria</td><td>STEM</td>
+                <td><span class="score-pill score-high">90%</span></td><td><span class="score-pill score-high">89%</span></td><td><span class="score-pill score-high">87%</span></td><td><span class="score-pill score-high">88.4%</span></td>
+                <td><span class="tier-badge tier-ruby">🔴 Ruby</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#18</strong></td><td><strong>Miriam S.</strong></td><td>🇰🇪 Kenya</td><td>Humanities</td>
+                <td><span class="score-pill score-high">85%</span></td><td><span class="score-pill score-high">83%</span></td><td><span class="score-pill score-high">81%</span></td><td><span class="score-pill score-high">82.6%</span></td>
+                <td><span class="tier-badge tier-ruby">🔴 Ruby</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#42</strong></td><td><strong>Seun O.</strong></td><td>🇳🇬 Nigeria</td><td>Business</td>
+                <td><span class="score-pill score-mid">77%</span></td><td><span class="score-pill score-mid">74%</span></td><td><span class="score-pill score-mid">72%</span></td><td><span class="score-pill score-mid">73.6%</span></td>
+                <td><span class="tier-badge tier-sapphire">🔵 Sapphire</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#89</strong></td><td><strong>Abena K.</strong></td><td>🇬🇭 Ghana</td><td>STEM</td>
+                <td><span class="score-pill score-mid">65%</span></td><td><span class="score-pill score-mid">68%</span></td><td><span class="score-pill score-mid">63%</span></td><td><span class="score-pill score-mid">65.2%</span></td>
+                <td><span class="tier-badge tier-tanzanite">🔷 Tanzanite</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgba(247,215,8,0.957);">⏳</td><td><strong>Tolu F.</strong></td><td>🇳🇬 Nigeria</td><td>Humanities</td>
+                <td><span class="score-pill score-high">82%</span></td><td><span class="score-pill score-high">80%</span></td><td><span class="score-pill score-pend">—</span></td><td><span class="score-pill score-pend">—</span></td>
+                <td><span class="tier-badge tier-none">—</span></td><td><span class="status-badge status-p"><span class="status-dot"></span> Pending R3</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgb(255,68,68);">❌</td><td>••••• •••</td><td>🌍</td><td>Business</td>
+                <td><span class="score-pill score-mid">60%</span></td><td><span class="score-pill score-low">55%</span></td><td><span class="score-pill score-low">51%</span></td><td>—</td>
+                <td><span class="tier-badge tier-none">—</span></td><td><span class="status-badge status-e"><span class="status-dot"></span> Dropped</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pt-note">Preview only. Scholar Tiers: 💎 Diamond (90–100%), 🔴 Ruby (80–89%), 🔵 Sapphire (70–79%), 🔷 Tanzanite (60–69%), 🟣 Amethyst (50–59%). Postgraduate thresholds apply. Student data is illustrative.</div>
+      </div>
+    </div>
+
+    <!-- ── PhD Table ── -->
+    <div id="panel-phd" class="table-panel">
+      <div class="pt-wrapper">
+        <div class="pt-stats">
+          <div class="pt-stat"><span class="pt-stat-value">84</span><span class="pt-stat-label">Enrolled</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">61</span><span class="pt-stat-label">Completed R3</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">4d 18h</span><span class="pt-stat-label">Window Closes</span></div>
+          <div class="pt-stat"><span class="pt-stat-value">79%</span><span class="pt-stat-label">Advancement Rate</span></div>
+        </div>
+        <div class="pt-header">
+          <span class="pt-title">🔴 Cohort 1 — PhD · Round 3 Live · Updated 2 min ago</span>
+          <div class="pt-filters">
+            <span class="pt-filter-tag">All Countries</span>
+            <span class="pt-filter-tag">All Tracks</span>
+            <span class="pt-filter-tag">Qualified Only</span>
+          </div>
+        </div>
+        <div class="pt-table-scroll">
+          <table class="progression">
+            <thead>
+              <tr><th>Rank</th><th>Candidate</th><th>Country</th><th>Track</th><th>R1</th><th>R2</th><th>R3</th><th>Cumulative</th><th>Tier</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#1</strong></td><td><strong>Dr. Yaw A.</strong></td><td>🇬🇭 Ghana</td><td>STEM</td>
+                <td><span class="score-pill score-high">98%</span></td><td><span class="score-pill score-high">96%</span></td><td><span class="score-pill score-high">95%</span></td><td><span class="score-pill score-high">96.3%</span></td>
+                <td><span class="tier-badge tier-diamond">💎 Diamond</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#3</strong></td><td><strong>Ifeoma C.</strong></td><td>🇳🇬 Nigeria</td><td>Humanities</td>
+                <td><span class="score-pill score-high">93%</span></td><td><span class="score-pill score-high">91%</span></td><td><span class="score-pill score-high">90%</span></td><td><span class="score-pill score-high">91.2%</span></td>
+                <td><span class="tier-badge tier-diamond">💎 Diamond</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#9</strong></td><td><strong>Olumide T.</strong></td><td>🇳🇬 Nigeria</td><td>STEM</td>
+                <td><span class="score-pill score-high">88%</span></td><td><span class="score-pill score-high">86%</span></td><td><span class="score-pill score-high">84%</span></td><td><span class="score-pill score-high">85.7%</span></td>
+                <td><span class="tier-badge tier-ruby">🔴 Ruby</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td><strong>#21</strong></td><td><strong>Aisha M.</strong></td><td>🇰🇪 Kenya</td><td>Business</td>
+                <td><span class="score-pill score-mid">78%</span></td><td><span class="score-pill score-mid">76%</span></td><td><span class="score-pill score-mid">74%</span></td><td><span class="score-pill score-mid">75.4%</span></td>
+                <td><span class="tier-badge tier-sapphire">🔵 Sapphire</span></td><td><span class="status-badge status-q"><span class="status-dot"></span> Cleared</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgba(247,215,8,0.957);">⏳</td><td><strong>Kwabena P.</strong></td><td>🇬🇭 Ghana</td><td>STEM</td>
+                <td><span class="score-pill score-high">91%</span></td><td><span class="score-pill score-high">88%</span></td><td><span class="score-pill score-pend">—</span></td><td><span class="score-pill score-pend">—</span></td>
+                <td><span class="tier-badge tier-none">—</span></td><td><span class="status-badge status-p"><span class="status-dot"></span> Pending R3</span></td>
+              </tr>
+              <tr>
+                <td style="color:rgb(255,68,68);">❌</td><td>••••• •••</td><td>🌍</td><td>Humanities</td>
+                <td><span class="score-pill score-mid">70%</span></td><td><span class="score-pill score-low">62%</span></td><td><span class="score-pill score-low">58%</span></td><td>—</td>
+                <td><span class="tier-badge tier-none">—</span></td><td><span class="status-badge status-e"><span class="status-dot"></span> Dropped</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pt-note">Preview only. PhD track features advanced subject-area assessment and independent research evaluation. Scholar Tiers: 💎 Diamond (90–100%), 🔴 Ruby (80–89%), 🔵 Sapphire (70–79%). Student data is illustrative.</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1241,9 +1086,7 @@ footer {
   <div class="register-inner">
     <p class="section-label" style="text-align:center">Get Involved</p>
     <h2 class="section-title reveal">Register your interest.</h2>
-    <p class="section-sub reveal">
-      Whether you're a student, an academic, a university, or a sponsor — we want to hear from you. Tell us who you are and we'll be in touch directly.
-    </p>
+    <p class="section-sub reveal">Whether you're a student, an academic, a university, or a sponsor — we want to hear from you. Tell us who you are and we'll be in touch directly.</p>
 
     <div class="form-card reveal">
       <div class="form-tabs">
@@ -1258,25 +1101,15 @@ footer {
         <p class="success-sub">Your registration has been received. We'll reach out with details about the founding cohort shortly.</p>
       </div>
 
-      <!-- Student -->
       <div id="panel-student" class="form-panel active">
         <form onsubmit="handleSubmit(event)">
           <input type="hidden" name="role" value="Student"/>
           <div class="form-row">
-            <div class="form-group">
-              <label>First Name</label>
-              <input type="text" name="first_name" placeholder="Adaeze" required/>
-            </div>
-            <div class="form-group">
-              <label>Last Name</label>
-              <input type="text" name="last_name" placeholder="Okonkwo" required/>
-            </div>
+            <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="Adaeze" required/></div>
+            <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Okonkwo" required/></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" name="email" placeholder="you@example.com" required/>
-            </div>
+            <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@example.com" required/></div>
             <div class="form-group">
               <label>Country</label>
               <select name="country" required>
@@ -1306,6 +1139,7 @@ footer {
                 <option>Secondary / A-Level / WAEC</option>
                 <option>Undergraduate</option>
                 <option>Postgraduate</option>
+                <option>PhD</option>
               </select>
             </div>
           </div>
@@ -1320,25 +1154,15 @@ footer {
         </form>
       </div>
 
-      <!-- Institution -->
       <div id="panel-institution" class="form-panel">
         <form onsubmit="handleSubmit(event)">
           <input type="hidden" name="role" value="Institution"/>
           <div class="form-row">
-            <div class="form-group">
-              <label>Your Name</label>
-              <input type="text" name="name" placeholder="Dr. Sarah Mensah" required/>
-            </div>
-            <div class="form-group">
-              <label>Your Title / Role</label>
-              <input type="text" name="title" placeholder="Head of International Admissions"/>
-            </div>
+            <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Dr. Sarah Mensah" required/></div>
+            <div class="form-group"><label>Your Title / Role</label><input type="text" name="title" placeholder="Head of International Admissions"/></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Institution / Organisation Name</label>
-              <input type="text" name="institution" placeholder="University of Edinburgh" required/>
-            </div>
+            <div class="form-group"><label>Institution / Organisation Name</label><input type="text" name="institution" placeholder="University of Edinburgh" required/></div>
             <div class="form-group">
               <label>Type</label>
               <select name="type" required>
@@ -1352,14 +1176,8 @@ footer {
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Official Email Address</label>
-              <input type="email" name="email" placeholder="admissions@university.ac.uk" required/>
-            </div>
-            <div class="form-group">
-              <label>Country / Region</label>
-              <input type="text" name="country" placeholder="United Kingdom"/>
-            </div>
+            <div class="form-group"><label>Official Email Address</label><input type="email" name="email" placeholder="admissions@university.ac.uk" required/></div>
+            <div class="form-group"><label>Country / Region</label><input type="text" name="country" placeholder="United Kingdom"/></div>
           </div>
           <div class="form-row full">
             <div class="form-group">
@@ -1372,51 +1190,32 @@ footer {
         </form>
       </div>
 
-      <!-- Academic -->
       <div id="panel-academic" class="form-panel">
         <form onsubmit="handleSubmit(event)">
           <input type="hidden" name="role" value="Academic"/>
           <div class="form-row">
-            <div class="form-group">
-              <label>Full Name</label>
-              <input type="text" name="name" placeholder="Prof. Ama Owusu" required/>
-            </div>
+            <div class="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Prof. Ama Owusu" required/></div>
             <div class="form-group">
               <label>Academic Title</label>
               <select name="title_level">
-                <option>Professor</option>
-                <option>Associate Professor</option>
-                <option>Senior Lecturer</option>
-                <option>Lecturer / Dr.</option>
-                <option>Other</option>
+                <option>Professor</option><option>Associate Professor</option>
+                <option>Senior Lecturer</option><option>Lecturer / Dr.</option><option>Other</option>
               </select>
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Institution</label>
-              <input type="text" name="institution" placeholder="University of Ghana" required/>
-            </div>
-            <div class="form-group">
-              <label>Department / Field</label>
-              <input type="text" name="field" placeholder="Mathematics / Economics / etc."/>
-            </div>
+            <div class="form-group"><label>Institution</label><input type="text" name="institution" placeholder="University of Ghana" required/></div>
+            <div class="form-group"><label>Department / Field</label><input type="text" name="field" placeholder="Mathematics / Economics / etc."/></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" name="email" placeholder="you@university.edu" required/>
-            </div>
+            <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@university.edu" required/></div>
             <div class="form-group">
               <label>Subject Track You Could Advise On</label>
               <select name="track">
                 <option value="">Select…</option>
-                <option>STEM</option>
-                <option>Business / Economics</option>
-                <option>Humanities / English</option>
-                <option>Social Sciences</option>
-                <option>Assessment Design / Education</option>
-                <option>Multiple / Other</option>
+                <option>STEM</option><option>Business / Economics</option>
+                <option>Humanities / English</option><option>Social Sciences</option>
+                <option>Assessment Design / Education</option><option>Multiple / Other</option>
               </select>
             </div>
           </div>
@@ -1474,12 +1273,20 @@ window.addEventListener('scroll', function(){
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
 });
 
-// Tab switching
+// Registration form tabs
 function switchTab(role) {
   document.querySelectorAll('.form-tab').forEach(function(t){ t.classList.remove('active'); });
   document.querySelectorAll('.form-panel').forEach(function(p){ p.classList.remove('active'); });
   event.target.classList.add('active');
   document.getElementById('panel-' + role).classList.add('active');
+}
+
+// Level switcher for progression table
+function switchLevel(event, level) {
+  document.querySelectorAll('.level-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.table-panel').forEach(function(p){ p.classList.remove('active'); });
+  event.currentTarget.classList.add('active');
+  document.getElementById('panel-' + level).classList.add('active');
 }
 
 // Form submission
@@ -1489,14 +1296,10 @@ function handleSubmit(e) {
   var data = new FormData(form);
   var obj = {};
   data.forEach(function(v,k){ obj[k] = v; });
-
-  // Replace this with your Formspree endpoint:
   fetch('https://formspree.io/f/mnjbbalb', {
     method: 'POST', headers: {'Content-Type':'application/json'},
     body: JSON.stringify(obj)
   });
-
-  // For now, show success state
   document.querySelectorAll('.form-panel').forEach(function(p){ p.style.display='none'; });
   document.querySelectorAll('.form-tab').forEach(function(t){ t.style.display='none'; });
   var s = document.getElementById('form-success');
@@ -1510,10 +1313,7 @@ var observer = new IntersectionObserver(function(entries){
     if(e.isIntersecting){ e.target.classList.add('visible'); }
   });
 }, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(function(el){
-  observer.observe(el);
-});
+document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
 </script>
 </body>
 </html>
